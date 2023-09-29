@@ -1,0 +1,61 @@
+# ███╗   ██╗███████╗██╗    ██╗███████╗██████╗  ██████╗  █████╗ ████████╗
+# ████╗  ██║██╔════╝██║    ██║██╔════╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝
+# ██╔██╗ ██║█████╗  ██║ █╗ ██║███████╗██████╔╝██║   ██║███████║   ██║   
+# ██║╚██╗██║██╔══╝  ██║███╗██║╚════██║██╔══██╗██║   ██║██╔══██║   ██║   
+# ██║ ╚████║███████╗╚███╔███╔╝███████║██████╔╝╚██████╔╝██║  ██║   ██║   
+# ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝ ╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝   ╚═╝   
+#
+# general settings
+auto-reload yes
+max-items 50
+
+# unbind keys
+unbind-key ENTER
+
+# bind keys - vim style
+bind-key j down
+bind-key k up
+bind-key l open
+bind-key h quit
+
+bind-key J next
+bind-key K prev
+bind-key l open
+bind-key h quit
+
+bind-key g home
+bind-key G end
+
+bind-key h quit
+
+bind-key n next-unread
+bind-key N prev-unread
+
+bind-key ^f pageup
+bind-key ^b pagedown
+
+# Color customization
+color background         default   default
+color listnormal         default   default
+color listnormal_unread  default   default
+color listfocus          white	color98
+color listfocus_unread   white	color98
+color info               default   black
+color article            default   default
+
+# Highlights
+highlight article "^(Title|Date|Author):.*$" color41 default bold
+highlight article "^(Título|Data|Autor):.*$" color41 default bold
+highlight article "^(Feed|Link):.*$" cyan default bold
+highlight article "https?://[^ ]+" cyan default bold
+highlight article "\\[image\\ [0-9]+\\]" yellow default
+highlight article "\\[imagem\\ [0-9]+.*\\]" yellow default
+highlight feedlist "^─.*$" cyan default bold
+highlight article "\\[[0-9]+\\]" cyan default bold
+
+highlight feedlist ".*0/0.." default default invis
+highlight feedlist "\<--.*--\>" green default bold
+highlight feedlist "\\*\\*\\*.*\\*\\*\\*" red default bold
+
+# MPV integration
+macro m set browser "/usr/bin/mpv %u"; open-in-browser ;
