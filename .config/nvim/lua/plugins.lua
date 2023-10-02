@@ -533,6 +533,13 @@ require("lazy").setup({
 			 -- vim.keymap.set('n', '<leader>hc', '<Cmd> ColorizerToggle <CR>', {desc = 'colorizer toggle'})
 		 end
 	 },
+
+	 {
+		'mbbill/undotree',
+		config = function()
+			vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, {desc = 'undo tree'})
+		end
+	 },
 	 -- {
 		--  "rareitems/anki.nvim",
 		--  config = function()
