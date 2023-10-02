@@ -1,5 +1,5 @@
 " Folding
-" setlocal nofoldenable
+setlocal nofoldenable
 
 " Identação
 setlocal smartindent
