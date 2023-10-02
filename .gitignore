@@ -3,6 +3,7 @@
 .conky
 .profile
 pt.utf-8.spl
+lazy-lock.json
 .luarc.json
 .conkyrc
 .gitconfig
