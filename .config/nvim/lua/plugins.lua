@@ -378,6 +378,8 @@ require("lazy").setup({
 		end,
 	},
 
+	{ 'rose-pine/neovim', name = 'rose-pine' },
+
 	{
 		 'nvim-lualine/lualine.nvim',
 		 dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
