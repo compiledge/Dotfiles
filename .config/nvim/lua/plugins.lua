@@ -359,7 +359,7 @@ require("lazy").setup({
 		config = function()
 
 			require("tokyonight").setup({
-				-- transparent = true,
+				transparent = true,
 				styles = {
 					-- Style to be applied to different syntax groups
 					-- Value is any valid attr-list value for `:help nvim_set_hl`
@@ -721,13 +721,19 @@ require("lazy").setup({
 		config = function()
 			require('lspsaga').setup({
 				ui = {
-					code_action = ' '
+					code_action = ' '
+
 				}
 
 			})
 
 			vim.keymap.set('n', '[d', ":Lspsaga diagnostic_jump_prev <CR>", {desc = 'diagnostic prev'})
 			vim.keymap.set('n', ']d', ":Lspsaga diagnostic_jump_next <CR>", {desc = 'diagnostic next'})
+
+			-- vim.keymap.set('n', '<leader>lpd', ":Lspsaga peek_type_definition <CR>", {desc = 'lsp peek type'})
+			-- vim.keymap.set('n', '<leader>lpt', ":Lspsaga peek_definition <CR>", {desc = 'lsp peek definition'})
+
+			vim.keymap.set('n', '<leader>lo', ":Lspsaga outline <CR>", {desc = 'lsp outline'})
 
 		end,
 		dependencies = {
