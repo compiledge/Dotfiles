@@ -625,23 +625,7 @@ require("lazy").setup({
 
 	{'nvim-tree/nvim-web-devicons', lazy = false},
 -- }}}
-	--[development]{{{
-
-	{
-		'neovim/nvim-lspconfig',
-		config = function()
-			local lspconfig = require('lspconfig')
-			lspconfig.clangd.setup {}
-
-			vim.keymap.set('n', '<leader>Ls', ":LspStop<CR>", {desc = 'Lsp Stop'})
-			vim.keymap.set('n', '<leader>Lr', ":LspStart<CR>", {desc = 'Lsp Start'})
-			vim.keymap.set('n', '<leader>Lr', ":LspRestart<CR>", {desc = 'Lsp Restart'})
-
-			-- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {desc = 'diagnostic prev'})
-			-- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {desc = 'diagnostic next'})
-
-		end,
-	},
+	--[LSP]{{{
 
 	{
 		"williamboman/mason.nvim",
@@ -649,11 +633,98 @@ require("lazy").setup({
 			require("mason").setup()
 		end,
 	},
+	-- {'williamboman/mason-lspconfig.nvim'},
+
+	{'VonHeikemen/lsp-zero.nvim',
+		branch = 'v3.x',
+		config = function()
+			local lsp_zero = require('lsp-zero')
+
+			lsp_zero.extend_lspconfig()
+
+			lsp_zero.on_attach(function(client, bufnr)
+				-- see :help lsp-zero-keybindings
+				-- to learn the available actions
+				lsp_zero.default_keymaps({buffer = bufnr})
+			end)
+
+			require('lspconfig').clangd.setup {}
+		end,
+	},
+
+	{
+		'neovim/nvim-lspconfig',
+		config = function()
+			local lspconfig = require('lspconfig')
+			-- lspconfig.clangd.setup {}
+
+			vim.keymap.set('n', '<leader>Ls', ":LspStop<CR>", {desc = 'Lsp Stop'})
+			vim.keymap.set('n', '<leader>Lr', ":LspStart<CR>", {desc = 'Lsp Start'})
+			vim.keymap.set('n', '<leader>Lr', ":LspRestart<CR>", {desc = 'Lsp Restart'})
+
+			-- Change diagnostic symbols in the sign column (gutter)
+			local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+			for type, icon in pairs(signs) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+			end
+
+		end,
+	},
+
+	{'L3MON4D3/LuaSnip'},
+	{'hrsh7th/cmp-nvim-lsp'},
+	{
+		'hrsh7th/nvim-cmp',
+		config = function()
+
+			local cmp = require'cmp'
+			local lspkind = require('lspkind')
+			cmp.setup {
+				view = {            
+					entries = "custom" -- can be "custom", "wildmenu" or "native"
+				},
+				formatting = {
+					format = lspkind.cmp_format({
+						mode = 'symbol_text', -- show only symbol annotations
+						maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+						ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+
+						menu = ({
+							buffer = "[Buffer]",
+							nvim_lsp = "[LSP]",
+							luasnip = "[LuaSnip]",
+							nvim_lua = "[Lua]",
+							latex_symbols = "[Latex]",
+						}),
+
+						-- The function below will be called before any actual modifications from lspkind
+						-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+						before = function (entry, vim_item)
+							return vim_item
+						end
+					})
+				},
+				window = {
+					completion = cmp.config.window.bordered(),
+					documentation = cmp.config.window.bordered(),
+				},
+			}
+		end,
+		dependencies = {
+			{'onsails/lspkind.nvim'},	-- Fancy icons to cmp
+		}
+	},
 
 	{
 		'nvimdev/lspsaga.nvim',
 		config = function()
-			require('lspsaga').setup({})
+			require('lspsaga').setup({
+				ui = {
+					code_action = ' '
+				}
+
+			})
 
 			vim.keymap.set('n', '[d', ":Lspsaga diagnostic_jump_prev <CR>", {desc = 'diagnostic prev'})
 			vim.keymap.set('n', ']d', ":Lspsaga diagnostic_jump_next <CR>", {desc = 'diagnostic next'})
