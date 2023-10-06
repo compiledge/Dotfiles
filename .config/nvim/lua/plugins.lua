@@ -448,7 +448,7 @@ require("lazy").setup({
 					 },
 					 shortcut = {
 						 {
-							 desc = ' Update',
+							 desc = '  Update',
 							 group = '@property',
 							 action = 'Lazy update',
 							 key = 'u'
@@ -461,13 +461,13 @@ require("lazy").setup({
 							 key = 'f',
 						 },
 						 {
-							 desc = ' Apps',
+							 desc = ' Org Mode Agenda',
 							 group = 'DiagnosticHint',
-							 action = 'Telescope app',
-							 key = 'a',
+							 action = 'require("orgmode.api.agenda").agenda()',
+							 key = 'o',
 						 },
 						 {
-							 desc = ' dotfiles',
+							 desc = ' dotfiles',
 							 group = 'Number',
 							 action = 'Telescope dotfiles',
 							 key = 'd',
