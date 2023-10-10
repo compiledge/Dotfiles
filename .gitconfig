@@ -1,0 +1,7 @@
+[user]
+	name = compiledge
+	username = compiledge
+	email = eduardo.iftm@gmail.com
+[core]
+	editor = nvim
+	excludesfile = /home/eduardo/.gitignoreg
