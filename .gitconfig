@@ -5,3 +5,10 @@
 [core]
 	editor = nvim
 	excludesfile = /home/eduardo/.gitignoreg
+[diff]
+	tool = nvimdiff
+[difftool]
+	prompt = false
+[merge]
+	tool = nvimdiff
+	prompt = true
