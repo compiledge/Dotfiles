@@ -1,0 +1,2 @@
+-- naughty = require('naughty')  -- if not yet loaded
+-- naughty.notify({text='Theme config folder imported'})

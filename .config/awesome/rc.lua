@@ -61,8 +61,10 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
--- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.init("/home/eduardo/.config/awesome/theme.lua")
+beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/theme.lua")
+
+-- Theme config folder
+require("themes/")
 
 -- Configurando algumas aplicações preferenciais
 terminal = "kitty"
@@ -87,15 +89,15 @@ local carrow = separators.arrow_left("alpha", "#8be9fd")
 awful.layout.layouts = {
 	awful.layout.suit.tile,
 	awful.layout.suit.tile.left,
-	awful.layout.suit.tile.bottom,
-	awful.layout.suit.tile.top,
 	awful.layout.suit.floating,
-	awful.layout.suit.fair,
-	awful.layout.suit.fair.horizontal,
-	awful.layout.suit.spiral,
-	awful.layout.suit.spiral.dwindle,
-	awful.layout.suit.max,
+	awful.layout.suit.tile.bottom,
 	awful.layout.suit.max.fullscreen,
+	-- awful.layout.suit.tile.top,
+	-- awful.layout.suit.fair,
+	-- awful.layout.suit.fair.horizontal,
+	-- awful.layout.suit.spiral,
+	-- awful.layout.suit.spiral.dwindle,
+	-- awful.layout.suit.max,
 	-- awful.layout.suit.magnifier,
 	-- awful.layout.suit.corner.nw,
 	-- awful.layout.suit.corner.ne,
@@ -154,11 +156,11 @@ local function make_fa_icon( code, pcolor)
     widget = wibox.widget.textbox
   }
 end
-local iconDate = make_fa_icon('\u{f274}', beautiful.icon_color)
-local iconClock = make_fa_icon('\u{f0996}', beautiful.color_cyan)
-local iconBat = make_fa_icon('\u{f0e7}', beautiful.color_orange)
-local iconCpu = make_fa_icon('\u{f0ee0}', beautiful.color_purple)
-local iconMem = make_fa_icon('\u{f061a}', beautiful.color_pink)
+-- local iconDate = make_fa_icon('\u{f274}', beautiful.icon_color)
+-- local iconClock = make_fa_icon('\u{f0996}', beautiful.or_cyan)
+-- local iconBat = make_fa_icon('\u{f0e7}', beautiful.color_orange)
+-- local iconCpu = make_fa_icon('\u{f0ee0}', beautiful.color_purple)
+-- local iconMem = make_fa_icon('\u{f061a}', beautiful.color_pink)
 
 -- [Widgets]:{{{
 
@@ -312,87 +314,79 @@ local iconMem = make_fa_icon('\u{f061a}', beautiful.color_pink)
 					awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
 					)
 
-					local tasklist_buttons = gears.table.join(
-					awful.button({ }, 1, function (c)
-						if c == client.focus then
-							c.minimized = true
-						else
-							c:emit_signal(
-							"request::activate",
-							"tasklist",
-							{raise = true}
-							)
-						end
-					end),
-					awful.button({ }, 3, function()
-						awful.menu.client_list({ theme = { width = 250 } })
-					end),
-					awful.button({ }, 4, function ()
-						awful.client.focus.byidx(1)
-					end),
-					awful.button({ }, 5, function ()
-						awful.client.focus.byidx(-1)
-					end))
+					-- local tasklist_buttons = gears.table.join(
+					-- awful.button({ }, 1, function (c)
+					-- 	if c == client.focus then
+					-- 		c.minimized = true
+					-- 	else
+					-- 		c:emit_signal(
+					-- 		"request::activate",
+					-- 		"tasklist",
+					-- 		{raise = true}
+					-- 		)
+					-- 	end
+					-- end),
+					-- awful.button({ }, 3, function()
+					-- 	awful.menu.client_list({ theme = { width = 250 } })
+					-- end),
+					-- awful.button({ }, 4, function ()
+					-- 	awful.client.focus.byidx(1)
+					-- end),
+					-- awful.button({ }, 5, function ()
+					-- 	awful.client.focus.byidx(-1)
+					-- end))
 
 					-- Atualização de ícones da taglist
-					local unfocus_icon = " "
-					local unfocus_color = "#f8f8f2"
-
-					local empty_icon = " " -- 
-					local empty_color = "#6272a4"
-
-					local focus_icon = " "
-					local focus_color = "#f8f8f2"
-
-					local urgent_icon = " "
-					local urgent_color = "#50fa7b"
+					-- local unfocus_icon = " "
+					-- local unfocus_color = "#f8f8f2"
+					--
+					-- local empty_icon = " " -- 
+					-- local empty_color = "#6272a4"
+					--
+					-- local focus_icon = " "
+					-- local focus_color = "#f8f8f2"
+					--
+					-- local urgent_icon = " "
+					-- local urgent_color = "#50fa7b"
 					 
 					-- Function to update the tags
-					local update_tags = function(self, c3)
-						local tagicon = self:get_children_by_id('icon_role')[1]
-						if c3.selected then
-							tagicon.text = focus_icon
-							self.fg = focus_color
-						elseif c3.urgent then
-							tagicon.text = urgent_icon
-							self.fg = urgent_color
-						elseif #c3:clients() == 0 then
-							tagicon.text = empty_icon
-							self.fg = empty_color
-						else
-							tagicon.text = unfocus_icon
-							self.fg = unfocus_color
-						end
-					end
+					-- local update_tags = function(self, c3)
+					-- 	local tagicon = self:get_children_by_id('icon_role')[1]
+					-- 	if c3.selected then
+					-- 		tagicon.text = focus_icon
+					-- 		self.fg = focus_color
+					-- 	elseif c3.urgent then
+					-- 		tagicon.text = urgent_icon
+					-- 		self.fg = urgent_color
+					-- 	elseif #c3:clients() == 0 then
+					-- 		tagicon.text = empty_icon
+					-- 		self.fg = empty_color
+					-- 	else
+					-- 		tagicon.text = unfocus_icon
+					-- 		self.fg = unfocus_color
+					-- 	end
+					-- end
 
 					awful.screen.connect_for_each_screen(function(s)
 
-						-- Cada tela recebe sua própria tabela de tags
-						-- awful.tag({ "爵 WEB", " VIM", " DEV", " STS", " PMD", " MSC"}, s, awful.layout.layouts[1])
-						-- awful.tag({ "爵", "", "", "", "", ""}, s, awful.layout.layouts[1])
-						-- awful.tag({"1", "2", "3", "4", "5", "6", "7", "8", "9"}, s, awful.layout.layouts[1])
-						-- awful.tag({"web", "vim", "vim", "vim", "vim"}, s, awful.layout.layouts[1])
+						local names = { "1", "2", "3", "4", "5", "6", "7", "8", "9"}
 
-						-- -- Customizando os nomes e layouts das tags
-						local names = { "1", "2", "3", "4", "5", "6", "7", "8"}
-						-- local l = awful.layout.suit  -- Um atalho pra digitação
-						-- local layouts = { l.floating, l.tile, l.floating, l.fair, l.max,
-						-- l.floating, l.tile.left, l.floating, l.floating }
-						awful.tag(names, s, awful.layout.layouts[1])
+						-- Select the default tag layout
+						local t = awful.layout.suit
+						local layouts = {
+							t.tile,	-- Tag 1
+							t.tile,	-- Tag 2
+							t.tile,
+							t.tile,
+							t.tile,
+							t.tile,
+							t.tile,
+							t.tile,
+							t.tile,
+						}
 
-						-- Adicionando tags mantualmente
-						-- awful.tag.add("First tag", {
-						-- 	icon               = "/path/to/icon1.png",
-						-- 	layout = awful.layout.suit.tile,
-						-- 	screen             = s,
-						-- 	selected           = true,
-						-- })
-						--
-						-- awful.tag.add("Second tag", {
-						-- 	icon = "/path/to/icon2.png",
-						-- 	layout = awful.layout.suit.tile,
-						-- 	screen = s,
-						-- })
+						-- create the tag collection
+						awful.tag(names, s, layouts)
 
 						-- Create a promptbox for each screen
 						s.mypromptbox = awful.widget.prompt()
@@ -456,26 +450,6 @@ local iconMem = make_fa_icon('\u{f061a}', beautiful.color_pink)
 							-- 	id     = "background_role",
 							-- 	widget = wibox.container.background,
 							-- },
-							widget_template = {
-								{
-									{ id = 'icon_role', font = "JetBrainsMono Nerd Font 12", widget = wibox.widget.textbox },
-									id = 'margin_role',
-									top = dpi(0),
-									bottom = dpi(0),
-									left = dpi(6),
-									right = dpi(2),
-									widget = wibox.container.margin
-								},
-								id = 'background_role',
-								widget = wibox.container.background,
-								create_callback = function(self, c3, index, objects)
-									update_tags(self, c3)
-								end,
-
-								update_callback = function(self, c3, index, objects)
-									update_tags(self, c3)
-								end
-							}
 						}
 
 						-- Criando e gerenciando a tasklist widget
@@ -1101,3 +1075,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 		awful.spawn.with_shell("~/git/Scripts/autorun-volumeicon.sh")
 	end
 --}}}
+
+-- naughty.notify({text='some message'})
