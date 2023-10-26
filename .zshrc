@@ -33,6 +33,7 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 export NVIMRC="$HOME/.config/nvim/init.lua"
 export COLORMODE=light
+export MANPAGER='nvim +Man!'
 
 export PATH="$HOME/.local/bin:$PATH"
 
