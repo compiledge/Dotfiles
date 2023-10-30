@@ -934,9 +934,23 @@ end
 				}, properties = { titlebars_enabled = false}
 			},
 
-			-- Regra para o conky,
-			{ rule = { instance = "conky" },
-			properties = { border_width = false, floating = true} },
+			-- Conky rule
+			{
+				rule = { instance = "conky" },
+				properties = {
+					border_width = false,
+					floating = true}
+			},
+
+			--Cmus-feh script rule
+			{
+				rule = {instance = "feh"},
+				properties = {
+					focus=false,
+					floating = false
+				}
+			},
+
 			-- { rule = { class = "plank" },
 			--   properties = { border_width = false, floating = true} },
 			-- { rule = { class = "pensela" },
@@ -1074,6 +1088,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 		-- Atualizando o volume
 		awful.spawn.with_shell("~/git/Scripts/autorun-volumeicon.sh")
 	end
+
 --}}}
 
 -- naughty.notify({text='some message'})
