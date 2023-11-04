@@ -177,12 +177,12 @@ end
 
 	local mycpu = lain.widget.cpu {
 		settings = function()
-			widget:set_markup(markup.fontfg("JetBrainsMono Nerd Font 12", beautiful.color_purple, cpu_now.usage .. "% "))
+			widget:set_markup(markup.fontfg("JetBrainsMono Nerd Font 12", beautiful.lblue, cpu_now.usage .. "% "))
 		end
 	}
 	local mymemory = lain.widget.mem{
 		settings = function()
-			widget:set_markup(markup.fontfg("JetBrainsMono Nerd Font 12", beautiful.color_pink, mem_now.used .. " B "))
+			widget:set_markup(markup.fontfg("JetBrainsMono Nerd Font 12", beautiful.lblue, mem_now.used .. " B "))
 		end
 	}
 
@@ -1091,4 +1091,9 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 --}}}
 
--- naughty.notify({text='some message'})
+naughty.notify({text='Restart Complete! :)'})
+
+-- local tt = awful.tooltip {
+--     text = "A tooltip!",
+--     visible = true,
+-- }
