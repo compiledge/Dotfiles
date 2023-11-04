@@ -67,7 +67,7 @@ require("lazy").setup({
 		config = function ()
 			require'nvim-treesitter.configs'.setup {
 				-- Lista dos parsers pré-instalados
-				ensure_installed = { "c", "lua", "org", "latex", "bash"},
+				ensure_installed = { "c", "lua", "org", "latex", "bash", "vim", "regex", "markdown", "markdown_inline"},
 
 				-- Instalar parsers sincronizamente (aplicar somente aos 'ensure_installed')
 				sync_install = false,
