@@ -81,10 +81,6 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
--- Separadores
-local separators = lain.util.separators
-local carrow = separators.arrow_left("alpha", "#8be9fd")
-
 -- Tabela com os layouts usados para organizar as janelas
 awful.layout.layouts = {
 	awful.layout.suit.tile,
@@ -156,33 +152,24 @@ local function make_fa_icon( code, pcolor)
     widget = wibox.widget.textbox
   }
 end
--- local iconDate = make_fa_icon('\u{f274}', beautiful.icon_color)
--- local iconClock = make_fa_icon('\u{f0996}', beautiful.or_cyan)
--- local iconBat = make_fa_icon('\u{f0e7}', beautiful.color_orange)
--- local iconCpu = make_fa_icon('\u{f0ee0}', beautiful.color_purple)
--- local iconMem = make_fa_icon('\u{f061a}', beautiful.color_pink)
+local iconDate = make_fa_icon('\u{f274}', beautiful.ddblue)
+local iconClock = make_fa_icon('\u{f0996}', beautiful.yellow)
+local iconBat = make_fa_icon('\u{f008f}', beautiful.orange)
+local iconCpu = make_fa_icon('\u{f0ee0}', beautiful.red)
+local iconMem = make_fa_icon('\u{f061a}', beautiful.purple)
 
 -- [Widgets]:{{{
-
-	powerArrow = wibox.widget {
-		widget = wibox.widget.separator,
-		shape  = gears.shape.powerline,
-		forced_width = 25,
-		color = "#FF3535",
-		-- border_color = "#FFFFFF"
-		-- shape  = gears.shape.powerline(cr, 70,70),
-	}
 
 	local markup = lain.util.markup
 
 	local mycpu = lain.widget.cpu {
 		settings = function()
-			widget:set_markup(markup.fontfg("JetBrainsMono Nerd Font 12", beautiful.color_purple, cpu_now.usage .. "% "))
+			widget:set_markup(markup.fontfg(beautiful.icon_font .. "12", beautiful.red, cpu_now.usage .. "% "))
 		end
 	}
 	local mymemory = lain.widget.mem{
 		settings = function()
-			widget:set_markup(markup.fontfg("JetBrainsMono Nerd Font 12", beautiful.color_pink, mem_now.used .. " B "))
+			widget:set_markup(markup.fontfg(beautiful.icon_font .. "12", beautiful.purple, mem_now.used .. " B "))
 		end
 	}
 
@@ -193,32 +180,31 @@ end
 			-- if bat_now.ac_status == 1 then
 			-- 	perc = perc .. " !"
 			-- end
-			widget:set_markup(markup.fontfg("JetBrainsMono Nerd Font 12", beautiful.color_orange, perc .. " "))
+			widget:set_markup(markup.fontfg(beautiful.icon_font .. "12", beautiful.orange, perc .. " "))
 			-- widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
 			bat_notification_charged_preset.title = "Bateria em 100%!"
 			bat_notification_charged_preset.text = "Totalmente recarregada."
 			bat_notification_charged_preset.timeout = 15
-			bat_notification_charged_preset.fg = "#50fa7b"
-			bat_notification_charged_preset.bg = "#282a36"
+			bat_notification_charged_preset.fg = beautiful.green
+			bat_notification_charged_preset.bg = beautiful.bg_normal
 
 			bat_notification_low_preset.title = "Bateria Baixa!"
 			bat_notification_low_preset.text = "Conecte o carregador."
 			bat_notification_low_preset.timeout = 15
-			bat_notification_low_preset.fg = "#ffb86c"
-			bat_notification_low_preset.bg = "#282a36"
+			bat_notification_low_preset.fg = beautiful.orange
+			bat_notification_low_preset.bg = beautiful.bg_normal
 
 			bat_notification_critical_preset.title = "Bateria Exausta!"
 			bat_notification_critical_preset.text = "Desligamento eminente."
 			bat_notification_critical_preset.timeout = 15
-			bat_notification_critical_preset.fg = "#ff5555"
-			bat_notification_critical_preset.bg = "#282a36"
+			bat_notification_critical_preset.fg = beautiful.red
+			bat_notification_critical_preset.bg = beautiful.bg_normal
 		end
 	}
 
 	local cmux = wibox.widget {
 		settings = function()
-			-- widget:set_markup(markup.fontfg("font", "#e0da37", "texto " .. cmus_widget{space = 9, timeout = 2} .. "M "))
-			widget:set_markup(markup.fontfg("font", "#e0da37", "texto M "))
+			widget:set_markup(markup.fontfg("font", beautiful.purple, "texto M "))
 		end
 	}
 
@@ -229,21 +215,17 @@ end
 		widget = wibox.widget.textbox
 	}
 
-		-- Container para customizar o Cmux widget
-		-- local bcmus = wibox.container.background(cmus_widget{space = 9, timeout = 5}, "#282a36")
-		-- bcmus.fg = "#ff79c6"
-
 		-- Container para customizar o relógio widget
 		local bclock = wibox.container.background()
 		bclock.widget = wibox.widget.textclock("%H:%M ")
-		bclock.fg = "#8be9fd"
+		bclock.fg = beautiful.yellow
 		-- bclock.bg = "#50fa7b"
 		-- bclock.shape = gears.shape.rounded_rect
 
 		-- Container para customizar o calendar widget
 		local bcalendar = wibox.container.background()
 		bcalendar.widget = wibox.widget.textclock("%a %d %b ")
-		bcalendar.fg = "#58FD8D"
+		bcalendar.fg = beautiful.ddblue
 		-- bcalendar.bg = "#8be9fd"
 
 		mykeyboardlayout = awful.widget.keyboardlayout()--}}}
@@ -511,7 +493,6 @@ end
 
 						-- Create the wibox
 						-- s.mywibox = awful.wibar({ position = "top", screen = s, height = 25, border_width=1}) 
-						-- s.mywibox = awful.wibar({ position = "top", screen = s, height = 30, border_width = dpi(3), border_color = "#44475a", shape = gears.shape.rounded_rect}) 
 						s.mywibox = awful.wibar({ position = "top", screen = s, height = 30, border_width = dpi(3), border_color = "#44475a"})
 
 
@@ -1091,4 +1072,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 --}}}
 
--- naughty.notify({text='some message'})
+naughty.notify({text='Restart Complete! :)'})
