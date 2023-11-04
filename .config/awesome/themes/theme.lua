@@ -226,7 +226,7 @@ theme.layout_floating                           = theme.confdir .. "/icons/float
 
 -- Icons
 -- ========================================================
--- Generate Awesome icon:
+-- Generate Awesomewm icon:
 theme.awesome_icon = theme_assets.awesome_icon(
     theme.menu_height, theme.bg_focus, theme.fg_focus
 )
@@ -234,27 +234,12 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- Gtk icon theme
 theme.icon_theme = "Papirus"
 
--- Etc (para posterior remoção)
+-- Nerdfonts icons
+theme.icon_size = 16
+theme.icon_font = "FiraCode Nerd Font "
+
+-- Etc
 -- ========================================================
 theme.useless_gap   = dpi(8)
--- theme.debian = theme.confdir .. "/icons/debian.png"
-
--- Nerdfont customizations
-theme.icon_size = 14
-theme.icon_font = "FiraCode Nerd Font "
-theme.icon_color = "#50fa7b"
-
-theme.color_cyan = '#8be9fd'
-theme.color_orange = '#ffb86c'
-
-theme.color_background = '#282a36'
-theme.color_current_line = '#44475a'
-theme.color_foreground = '#f8f8f2'
-theme.color_comment = '#6272a4'
-theme.color_green = '#50fa7b'
-theme.color_pink = '#ff79c6'
-theme.color_purple = '#bd93f9'
-theme.color_red = '#ff5555'
-theme.color_yellow = '#f1fa8c'
 
 return theme
