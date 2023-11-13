@@ -6,9 +6,8 @@
 -- ██║██║ ╚████║██║   ██║██╗███████╗╚██████╔╝██║  ██║
 -- ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
 --
-require("options") 		-- configuração gerais do nvim
-require("visual") 		-- configuração estéticas do editor
-require("keybindings") 	-- atalhos customizados
+require("options") 		-- standart options
+require("visual") 		-- visual configuration
+require("keybindings") 	-- shortcuts
 require("templates") 	-- skeletons to files
 require("plugins") 		-- Lazy plugin configs
-
