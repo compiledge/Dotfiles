@@ -26,7 +26,7 @@ return {
 		},
 	},
 
-	-- Configure LazyVim to load gruvbox
+	-- Configure LazyVim to tokyonight
 	{
 		"LazyVim/LazyVim",
 		opts = {
@@ -156,6 +156,7 @@ return {
 			ensure_installed = {
 				"bash",
 				"html",
+				"org",
 				"javascript",
 				"json",
 				"lua",
@@ -416,77 +417,7 @@ return {
 -- 	},
 -- -- }}}
 -- 	-- [Notas]{{{
--- 	{ -- Simulando o GTD com orgmode
--- 		'nvim-orgmode/orgmode',
--- 		dependencies = {{'nvim-treesitter/nvim-treesitter'}},
--- 		config = function()
 --
--- 			-- Carregando configurações customizada do treesitter para o tipo org
--- 			require('orgmode').setup_ts_grammar()
---
--- 			-- Configurações do Treesitter para o org
--- 			require('nvim-treesitter.configs').setup {
--- 				--
--- 				-- Caso TS não esteja habilitado, a coloração fica por conta do modo default do Vim.
--- 				highlight = {
--- 					enable = true,
--- 					-- Necessário para checagem de dicionário.
--- 					-- Algumas colorações de LaTex e blocos de código que não possuem
--- 					-- gramática no TS
--- 					additional_vim_regex_highlighting = {'org'},
--- 				}
--- 			}
---
--- 			require('orgmode').setup{
--- 				-- Diretórios alvo para agenda e capture
--- 				org_agenda_files = {'~/git/org/*'},
--- 				org_default_notes_file = '~/git/org/refile.org',
---
--- 				win_split_mode = 'auto',
---
--- 				org_todo_keywords = {'TODO(t)', 'NOTE(n)', 'WAIT(w)',
--- 				'NEXT(x)', 'PROJ(p)', '|', 'DONE(d)', 'DROP(c)'},
--- 				org_todo_keyword_faces = {
--- 					TODO = ':foreground #8be9fd :weight bold :slant italic :underline on',
--- 					NEXT = ':foreground #ffb86c :weitht bold :slant italic :underline on',
--- 					NOTE = ':foreground #ff79c6 :weight bold :slant italic :underline on',
--- 					WAIT = ':foreground #f1fa8c :weight bold :slant italic :underline on',
--- 					PROJ = ':foreground #bd93f9 :weight bold :slant italic :underline on',
--- 					DONE = ':foreground #50fa7b :weight bold :slant italic :underline on',
--- 					DROP = ':foreground #ff5555 :weight bold :slant italic :underline on',
--- 				},
--- 				org_highlight_latex_and_related = 'entities',
--- 				-- org_capture_templates = {
--- 				--  t = {
--- 				-- 	 description = 'Todo',
--- 				-- 	 template = '* TODO %?\n',
--- 				-- 	 target = '~/git/org/refile.org'
--- 				--  },
--- 				--  n = {
--- 				-- 	 description = 'Note',
--- 				-- 	 template = '* NOTE %?\n',
--- 				-- 	 target = '~/git/org/refile.org'
--- 				--  },
--- 				-- },
--- 			}
--- 		end,
--- 	 },
---
--- 	 {	-- Equipando o refile do orgmode com as lentes do telescope
--- 		 'joaomsa/telescope-orgmode.nvim',
--- 		 dependencies = {"telescope.nvim"},
--- 		 config = function()
--- 			 vim.api.nvim_create_autocmd('FileType', {
--- 				 pattern = 'org',
--- 				 group = vim.api.nvim_create_augroup('orgmode_telescope_nvim', { clear = true }),
--- 				 callback = function()
--- 					 vim.keymap.set('n', '<leader>oR', require('telescope').extensions.orgmode.refile_heading, {desc = 'telescope org-refile'})
--- 					 vim.keymap.set('n', '<leader>of', require('telescope').extensions.orgmode.search_headings, {desc = 'telescope org-headings'})
--- 				 end,
--- 			 })
--- 			 require('telescope').load_extension('orgmode')
--- 		 end,
--- 	},
 --
 -- 	{	-- Encontrando referẽncias com o telescope
 -- 		"nvim-telescope/telescope-bibtex.nvim",
@@ -527,39 +458,7 @@ return {
 -- 		end,
 -- 	},
 --
--- 	{	-- Efeitando o orgmode.nvim
--- 		'akinsho/org-bullets.nvim',
--- 		config = function()
--- 			require('org-bullets').setup{
--- 				concealcursor = false, -- Implimindo os caracteres reais sob o cursors
--- 				symbols = {
--- 					headlines = { "◉", "○", "✸", "✿" }, -- versão padrão
--- 					-- headlines = {"⬢", "◆", "■", "○"}, --  customizado
--- 					checkboxes = {
--- 						half = { "", "OrgTSCheckboxHalfChecked" },
--- 						done = { "✓", "OrgDone" },
--- 						todo = { "˟", "OrgTODO" },
--- 					},
--- 				},
--- 			}
--- 		end
--- 	},
 --
--- 	-- {	-- INFO: Não funciona tão bem quando usamos muitos multíplos headers
--- 	-- 	'lukas-reineke/headlines.nvim',
--- 	-- 	dependencies = "nvim-treesitter/nvim-treesitter",
--- 	-- 	opts= {
--- 	-- 		org = {
--- 	-- 			headline_highlights = { "Headline1", "Headline2" },
--- 	-- 		},
--- 	-- 	},
--- 	-- 	config = function()
--- 	-- 		vim.cmd [[highlight Headline1 guibg=#1e2718]]
--- 	-- 		vim.cmd [[highlight Headline2 guibg=#21262d]]
--- 	-- 		vim.cmd [[highlight CodeBlock guibg=#1c1c1c]]
--- 	-- 		vim.cmd [[highlight Dash guibg=#D19A66 gui=bold]]
--- 	-- 	end,
--- 	-- },
 --
 -- 	{	-- Zettelkasten baseado no poder do telescope e markdown
 -- 	'renerocksai/telekasten.nvim',
