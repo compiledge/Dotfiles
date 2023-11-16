@@ -116,7 +116,7 @@ return {
 		dependencies = {
 			"jose-elias-alvarez/typescript.nvim",
 			init = function()
-				require("lazyvim.util").on_attach(function(_, buffer)
+				require("lazyvim.util").lsp.on_attach(function(_, buffer)
           -- stylua: ignore
           vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
 					vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
@@ -149,14 +149,16 @@ return {
 	-- treesitter, mason and typescript.nvim. So instead of the above, you can use:
 	{ import = "lazyvim.plugins.extras.lang.typescript" },
 
-	-- add more treesitter parsers
 	{
+		-- Treesitter configurations and abstraction layer for Neovim.
 		"nvim-treesitter/nvim-treesitter",
 		opts = {
 			ensure_installed = {
 				"bash",
+				"c",
 				"html",
 				"org",
+				"latex",
 				"javascript",
 				"json",
 				"lua",
@@ -171,20 +173,6 @@ return {
 				"yaml",
 			},
 		},
-	},
-
-	-- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
-	-- would overwrite `ensure_installed` with the new value.
-	-- If you'd rather extend the default config, use the code below instead:
-	{
-		"nvim-treesitter/nvim-treesitter",
-		opts = function(_, opts)
-			-- add tsx and treesitter
-			vim.list_extend(opts.ensure_installed, {
-				"tsx",
-				"typescript",
-			})
-		end,
 	},
 
 	-- the opts function can also be used to change the default opts:
@@ -218,10 +206,10 @@ return {
 		"williamboman/mason.nvim",
 		opts = {
 			ensure_installed = {
-				"stylua",
-				"shellcheck",
-				"shfmt",
-				"flake8",
+				-- "stylua",
+				-- "shellcheck",
+				-- "shfmt",
+				-- "flake8",
 			},
 		},
 	},
@@ -338,30 +326,7 @@ return {
 -- 		end,
 -- 	},
 --
--- 	{	--	Colorindo o texto de forma interessante
--- 		'nvim-treesitter/nvim-treesitter',
--- 		build = ':TSUpdate',
--- 		config = function ()
--- 			require'nvim-treesitter.configs'.setup {
--- 				-- Lista dos parsers pré-instalados
--- 				ensure_installed = { "c", "lua", "org", "latex", "bash", "vim", "regex", "markdown", "markdown_inline"},
---
--- 				-- Instalar parsers sincronizamente (aplicar somente aos 'ensure_installed')
--- 				sync_install = false,
---
--- 				-- Automaticamente instalar parsers faltantes quando entrar no buffer
--- 				-- Dica: manter desligado quando não temos o tree-sitter CLI
--- 				auto_install = false,
---
--- 				-- Lista de parsers para serem ignorados
--- 				-- ignore_install = { "javascript" }
---
--- 				highlight = {
--- 					enable = true,
--- 				},
--- 			}
--- 		end,
--- 	},
+-- 	,
 --
 -- -- }}}
 -- 	-- [Fuzzy Finder]{{{
