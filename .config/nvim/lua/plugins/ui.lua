@@ -37,7 +37,7 @@ return {
 					command_palette = false, -- position the cmdline and popupmenu together
 					long_message_to_split = true, -- long messages will be sent to a split
 					inc_rename = false, -- enables an input dialog for inc-rename.nvim
-					lsp_doc_border = false, -- add a border to hover docs and signature help
+					lsp_doc_border = true, -- add a border to hover docs and signature help
 				},
 
 				-- Position the cmdline and popupmenu together
@@ -98,4 +98,65 @@ return {
 			top_down = false,
 		},
 	},
+
+	-- {
+	-- 	"nvimdev/dashboard-nvim",
+	-- 	event = "VimEnter",
+	-- 	config = function()
+	-- 		require("dashboard").setup({
+	-- 			-- config
+	-- 			theme = "hyper", --  theme is doom and hyper default is hyper
+	-- 			-- disable_move    --  default is false disable move keymap for hyper
+	-- 			-- shortcut_type   --  shorcut type 'letter' or 'number'
+	-- 			-- change_to_vcs_root -- default is false,for open file in hyper mru. it will change to the root of vcs
+	-- 			-- config = {},    --  config used for theme
+	-- 			-- hide = {
+	-- 			--  statusline    -- hide statusline default is true
+	-- 			--  tabline       -- hide the tabline
+	-- 			--  winbar        -- hide winbar
+	-- 			-- },
+	-- 			-- preview = {
+	-- 			--  command       -- preview command
+	-- 			--  file_path     -- preview file path
+	-- 			--  file_height   -- preview file height
+	-- 			--  file_width    -- preview file width
+	-- 			-- },
+	--
+	-- 			config = {
+	-- 				-- header = custom_banner,
+	-- 				week_header = {
+	-- 					enable = true,
+	-- 				},
+	-- 				shortcut = {
+	-- 					{
+	-- 						desc = "  Update",
+	-- 						group = "@property",
+	-- 						action = "Lazy update",
+	-- 						key = "u",
+	-- 					},
+	-- 					{
+	-- 						icon_hl = "@variable",
+	-- 						desc = "󰭎 Files",
+	-- 						group = "Label",
+	-- 						action = "Telescope find_files",
+	-- 						key = "f",
+	-- 					},
+	-- 					{
+	-- 						desc = " Org Mode Agenda",
+	-- 						group = "DiagnosticHint",
+	-- 						action = 'require("orgmode.api.agenda").agenda()',
+	-- 						key = "o",
+	-- 					},
+	-- 					{
+	-- 						desc = " dotfiles",
+	-- 						group = "Number",
+	-- 						action = "Telescope dotfiles",
+	-- 						key = "d",
+	-- 					},
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- },
 }
