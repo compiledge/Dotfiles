@@ -137,13 +137,13 @@ return {
 	{ import = "lazyvim.plugins.extras.lang.typescript" },
 
 	-- the opts function can also be used to change the default opts:
-	{
-		"nvim-lualine/lualine.nvim",
-		event = "VeryLazy",
-		opts = function(_, opts)
-			table.insert(opts.sections.lualine_x, "😄")
-		end,
-	},
+	-- {
+	-- 	"nvim-lualine/lualine.nvim",
+	-- 	event = "VeryLazy",
+	-- 	opts = function(_, opts)
+	-- 		table.insert(opts.sections.lualine_x, "😄")
+	-- 	end,
+	-- },
 
 	-- or you can return new options to override all the defaults
 	{
@@ -155,12 +155,6 @@ return {
 			}
 		end,
 	},
-
-	-- use mini.starter instead of alpha
-	{ import = "lazyvim.plugins.extras.ui.mini-starter" },
-
-	-- add jsonls and schemastore packages, and setup treesitter for json, json5 and jsonc
-	{ import = "lazyvim.plugins.extras.lang.json" },
 
 	-- add any tools you want to have installed below
 	{
@@ -452,93 +446,6 @@ return {
 -- 		end
 -- 	},
 --
--- 	 {
--- 		 'glepnir/dashboard-nvim',
--- 		 event = 'VimEnter',
--- 		 config = function()
---
--- 			 local custom_banner ={
--- 				 "",
--- 				 "",
--- 				 "⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⣷⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢰⡇⡄⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⣾⡇⠰⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⢀⠈⢦⢀⢀⢀⢀⢀⢀⢀⣼⣿⡇⢀⢃⢀⢀⢀⢀⢀⢀⣀⠴⠁⢀⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⢀⢀⠈⣧⡁⠢⢀⢀⢀⠐⠛⠿⣇⠠⢀⠂⢀⢀⣠⣴⡾⠡⠁⢀⢀⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⢀⢀⢀⠸⣿⣦⣨⣴⣾⠿⠟⢓⣀⡚⠿⠿⣶⣦⡽⢋⢀⠃⢀⢀⢀⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⣀⣀⢀⢀⢀⢀⣴⡿⢛⣥⣶⢿⡿⢿⣿⡿⣿⡷⣶⣍⡻⢿⣮⡀⢀⢀⢀⢀⣀⡀⢀⢀",
--- 				 "⢀⢀⢀⠙⢶⣤⣀⢧⣿⢋⣴⠟⢱⠇⡞⢀⣠⣿⣄⠈⢷⢸⡉⠻⣦⡹⣷⣼⠿⠛⡩⠊⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⠙⢹⣿⢣⣿⠃⢀⠸⡆⢧⢀⠈⠟⠁⢀⡾⢸⠁⢀⢹⣷⡘⣿⡔⠊⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⠠⣤⣴⣿⡇⣾⣿⣄⢀⢀⠙⢮⡓⠦⠤⠶⢛⡵⠃⢀⢀⣸⣿⣧⢹⣷⣤⡤⡀⢀⢀⢀",
--- 				 "⢀⢀⢀⠐⢌⠙⠻⠿⣛⣛⣛⡓⢀⢀⣴⣿⣿⡟⠉⠉⠠⡀⣀⣋⣉⣛⡛⠿⠟⠋⡠⠁⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⠁⠠⠾⠟⠛⠻⠿⠷⣦⣍⠻⣿⡇⢀⣴⣾⣿⠿⠿⠛⠛⠿⢷⡀⠈⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⢀⠈⠢⢀⡀⢀⢀⡀⢀⠉⣳⡜⠇⢡⡿⠋⣀⠠⠤⠤⢀⢀⠄⠂⢀⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢱⡐⣌⡀⢀⢱⡿⠁⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢸⣇⢹⣷⢀⠈⠁⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⠘⡟⣼⣿⣧⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⣰⣿⣿⣿⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢻⣿⣿⣿⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀",
--- 				 "⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢿⣿⡇⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀⢀",
--- 				 "",
--- 				 "",
--- 			 }
--- 			 require('dashboard').setup {
--- 				 -- config
--- 				 theme = 'hyper',  --  theme is doom and hyper default is hyper
--- 				 -- disable_move    --  default is false disable move keymap for hyper
--- 				 -- shortcut_type   --  shorcut type 'letter' or 'number'
--- 				 -- change_to_vcs_root -- default is false,for open file in hyper mru. it will change to the root of vcs
--- 				 -- config = {},    --  config used for theme
--- 				 -- hide = {
--- 					--  statusline    -- hide statusline default is true
--- 					--  tabline       -- hide the tabline
--- 					--  winbar        -- hide winbar
--- 				 -- },
--- 				 -- preview = {
--- 					--  command       -- preview command
--- 					--  file_path     -- preview file path
--- 					--  file_height   -- preview file height
--- 					--  file_width    -- preview file width
--- 				 -- },
---
--- 				 config = {
--- 					 -- header = custom_banner,
--- 					 week_header = {
--- 						 enable = true,
--- 					 },
--- 					 shortcut = {
--- 						 {
--- 							 desc = '  Update',
--- 							 group = '@property',
--- 							 action = 'Lazy update',
--- 							 key = 'u'
--- 						 },
--- 						 {
--- 							 icon_hl = '@variable',
--- 							 desc = '󰭎 Files',
--- 							 group = 'Label',
--- 							 action = 'Telescope find_files',
--- 							 key = 'f',
--- 						 },
--- 						 {
--- 							 desc = ' Org Mode Agenda',
--- 							 group = 'DiagnosticHint',
--- 							 action = 'require("orgmode.api.agenda").agenda()',
--- 							 key = 'o',
--- 						 },
--- 						 {
--- 							 desc = ' dotfiles',
--- 							 group = 'Number',
--- 							 action = 'Telescope dotfiles',
--- 							 key = 'd',
--- 						 },
--- 					 },
--- 				 },
--- 			 }
--- 		 end,
--- 		 dependencies = {'nvim-tree/nvim-web-devicons'}
--- 	 },
 --
 -- 	{ 'echasnovski/mini.nvim',
 -- 		version = '*',
