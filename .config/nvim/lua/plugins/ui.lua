@@ -125,4 +125,18 @@ return {
 			})
 		end,
 	},
+
+	{
+		-- Animate common Neovim actions
+		"echasnovski/mini.animate",
+		event = "VeryLazy",
+		opts = function(_, opts)
+			opts.open = {
+				enable = false,
+			}
+			opts.close = {
+				enable = false,
+			}
+		end,
+	},
 }
