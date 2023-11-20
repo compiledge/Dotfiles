@@ -88,6 +88,9 @@ return {
 	{
 		-- Treesitter configurations and abstraction layer for Neovim.
 		"nvim-treesitter/nvim-treesitter",
+		keys = {
+			{ "<C-Space>", false, mode = { "n" } },
+		},
 		opts = {
 			ensure_installed = {
 				"bash",
@@ -107,6 +110,9 @@ return {
 				"typescript",
 				"vim",
 				"yaml",
+			},
+			incremental_selection = {
+				enable = false,
 			},
 		},
 	},
