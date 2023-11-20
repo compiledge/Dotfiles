@@ -89,21 +89,16 @@ return {
 	},
 
 	{
-		-- Adds highlights for text filetypes, like markdown, orgmode, and neorg.
 		"lukas-reineke/headlines.nvim",
-		enabled = false,
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		ft = { "org" },
-		opts = {
-			org = {
-				headline_highlights = { "Headline1", "Headline2" },
-			},
-		},
-		config = function()
-			vim.cmd([[highlight Headline1 guibg=#1e2718]])
-			vim.cmd([[highlight Headline2 guibg=#21262d]])
-			vim.cmd([[highlight CodeBlock guibg=#1c1c1c]])
-			vim.cmd([[highlight Dash guibg=#D19A66 gui=bold]])
+		enabled = true,
+		opts = function()
+			return {
+				require("headlines").setup({
+					org = {
+						headline_highlights = false,
+					},
+				}),
+			}
 		end,
 	},
 
