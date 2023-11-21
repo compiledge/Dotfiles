@@ -130,10 +130,10 @@ return {
 		"SirVer/ultisnips",
 		config = function()
 			-- Keys
-			vim.cmd([[let g:UltiSnipsExpandTrigger       = '<Tab>']])
-			vim.cmd([[let g:UltiSnipsJumpForwardTrigger  = '<Tab>']])
-			vim.cmd([[let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>']])
-			vim.cmd([[let g:UltiSnipsListSnippets = '<leader>sl']])
+			-- vim.cmd([[let g:UltiSnipsExpandTrigger       = '<Tab>']])
+			-- vim.cmd([[let g:UltiSnipsJumpForwardTrigger  = '<Tab>']])
+			-- vim.cmd([[let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>']])
+			-- vim.cmd([[let g:UltiSnipsListSnippets = '<leader>sl']])
 
 			-- Snippets folder
 			vim.cmd([[let g:UltiSnipsSnippetDirectories = [$HOME.'/.snippets/'] ]])
