@@ -4,18 +4,16 @@
 -- ░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀░░▀▀▀░▀▀▀░▀░▀
 --
 
--- --Geral
--- vim.o.encoding = "UTF-8" --Codificação do documento
---
+-- Invisible chars style
+vim.o.listchars = "tab:▷-,eol:↴,trail:~,extends:>,precedes:<,space:⋅"
+vim.o.list = false -- Show some invisible characters (tabs...
+
 -- --Indentação
 -- vim.o.smartindent = true --Automaticamente insere um nível extra de identação
 -- vim.o.smarttab = true --Automaticamente insere tab no início da linha
 -- vim.o.tabstop = 3 --Mostra os tabs como 3 espaços
 -- vim.o.shiftwidth = 3 --Quando identando com '>', usa 3 espaços
 -- vim.o.expandtab = false --Tab pro espaço? Tab venceu a guerra :)
---
--- -- Caracteres (in)visíveis
--- vim.o.listchars = "tab:▷-,eol:↴,trail:~,extends:>,precedes:<,space:⋅"
 --
 -- -- Scroll
 -- vim.o.scrolloff = 8 -- Máximo de linhas até rolar a janela
