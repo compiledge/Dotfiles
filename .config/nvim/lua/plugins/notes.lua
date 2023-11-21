@@ -1,7 +1,7 @@
 --
--- ░█▀█░█▀▄░█▀▀░█▄█░█▀█░█▀▄░█▀▀░░░░█░░░█░█░█▀█
--- ░█░█░█▀▄░█░█░█░█░█░█░█░█░█▀▀░░░░█░░░█░█░█▀█
--- ░▀▀▀░▀░▀░▀▀▀░▀░▀░▀▀▀░▀▀░░▀▀▀░▀░░▀▀▀░▀▀▀░▀░▀
+-- ░█▀█░█▀█░▀█▀░█▀▀░█▀▀░░░░█░░░█░█░█▀█
+-- ░█░█░█░█░░█░░█▀▀░▀▀█░░░░█░░░█░█░█▀█
+-- ░▀░▀░▀▀▀░░▀░░▀▀▀░▀▀▀░▀░░▀▀▀░▀▀▀░▀░▀
 --
 return {
 
@@ -41,7 +41,7 @@ return {
 					"NEXT(n)",
 					"|",
 					"DONE(d)",
-					"DROP(D)",
+					"DROP(x)",
 				},
 
 				org_todo_keyword_faces = {
@@ -67,6 +67,13 @@ return {
 				--  },
 				-- },
 			})
+		end,
+	},
+
+	{
+		"hrsh7th/nvim-cmp",
+		opts = function(_, opts)
+			table.insert(opts.sources, { name = "orgmode" })
 		end,
 	},
 
@@ -106,6 +113,7 @@ return {
 		--Integration for orgmode with telescope.nvim.
 		"joaomsa/telescope-orgmode.nvim",
 		dependencies = { "telescope.nvim" },
+		ft = { "org" },
 		config = function()
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "org",
@@ -127,5 +135,22 @@ return {
 			})
 			require("telescope").load_extension("orgmode")
 		end,
+	},
+
+	{
+		-- Search and paste entries from *.bib files with telescope.nvim.
+		"nvim-telescope/telescope-bibtex.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim" },
+		ft = { "markdown", "org" },
+		keys = {
+			{ "<leader>fB", "<Cmd> Telescope bibtex <CR>", desc = "Find Bibtex" },
+		},
+		opts = {
+			extensions = {
+				bibtex = {
+					global_files = { "~/git/bib/" },
+				},
+			},
+		},
 	},
 }
