@@ -12,7 +12,7 @@ noremap <F3> :make clean<CR>
 inoremap <F3> :make clean<CR>
 
 " Update the tags file when buffer is saved
-autocmd BufWritePost * call system("ctags -R")
+" autocmd BufWritePost * call system("ctags -R")
 
 " Local sets
 set signcolumn=yes	" Add a column on the left. Useful for linting
