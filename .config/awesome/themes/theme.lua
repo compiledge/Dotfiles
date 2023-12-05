@@ -1,14 +1,14 @@
 -- Imports
 -- ========================================================
 local gears = require("gears")
-local lain  = require("lain")
+local lain = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
-local dpi   = require("beautiful.xresources").apply_dpi
+local dpi = require("beautiful.xresources").apply_dpi
 
 local xresources = require("beautiful.xresources")
 local xrdb = xresources.get_current_theme() -- X theme colors
-local dpi = xresources.apply_dpi            -- X dpi
+local dpi = xresources.apply_dpi -- X dpi
 
 local theme_assets = require("beautiful.theme_assets")
 
@@ -30,33 +30,30 @@ theme.font_prompt = "VictorMono Nerd Font, Medium Italic 12"
 -- Color Pallete
 -- Tokyo Night
 -- ========================================================
-theme.red = "#f7768e"
-theme.orange = "#ff9e64"
-theme.yellow = "#e0af68"
-theme.green = "#9ece6a"
-theme.cyan = "#73daca"
-theme.blue = "#b4f9f8"
-theme.lblue = "#7dcfff"
-theme.dblue = "#2ac3de"
-theme.ddblue = "#7aa2f7"
-theme.purple = "#bb9af7"
-theme.lgray = "#c0caf5"
-theme.foreground = "#a9b1d6"
-theme.mark = "#9aa5ce"
-theme.light_bg = "#cfc9c2"
-theme.comments = "#565f89"
-theme.terminal = "#414868"
-theme.background = "#24283b"	-- storm
-theme.moon = "#222436"			-- night
-theme.night = "#1a1b26"			-- night
+theme.moon = "#222436" --moon
+theme.night = "#1a1b26" --night
+theme.storm = "#24283b" --storm
+theme.foreground = "#c8d3f5"
+theme.background = theme.moon
+theme.red = "#ff757f"
+theme.yellow = "#ffc777"
+theme.green = "#c3e88d"
+theme.dblue = "#82aaff"
+theme.purple = "#c099ff"
+theme.blue = "#86e1fc"
+theme.orange = "#ff966c"
+theme.cyan = "#4fd6be"
+theme.dred = "#c53b53"
+theme.comments = "#828bb8"
 theme.transparent = "#00000000"
 
 -- Basic colors config
 -- ========================================================
 theme.bg_normal = theme.moon
-theme.bg_focus = theme.cyan
+theme.bg_focus = theme.foreground
 theme.bg_urgent = theme.orange
 theme.bg_minimize = theme.moon
+theme.fg_widgets = theme.dblue
 
 -- Foreground Colors
 theme.fg_normal = theme.foreground
@@ -176,7 +173,7 @@ theme.menu_border_width = dpi(3)
 
 -- theme.menu_submenu_icon = themes_path.."default/submenu.png"
 theme.menu_height = dpi(20)
-theme.menu_width  = dpi(350)
+theme.menu_width = dpi(350)
 
 -- Borders
 -- ========================================================
@@ -190,19 +187,19 @@ theme.widget_border_color = theme.cyan
 
 -- Awesomewm Icons (Tiles)
 -- ========================================================
-theme.layout_tile                               = theme.confdir .. "/icons/tile.png"
-theme.layout_tilegaps                           = theme.confdir .. "/icons/tilegaps.png"
-theme.layout_tileleft                           = theme.confdir .. "/icons/tileleft.png"
-theme.layout_tilebottom                         = theme.confdir .. "/icons/tilebottom.png"
-theme.layout_tiletop                            = theme.confdir .. "/icons/tiletop.png"
-theme.layout_fairv                              = theme.confdir .. "/icons/fairv.png"
-theme.layout_fairh                              = theme.confdir .. "/icons/fairh.png"
-theme.layout_spiral                             = theme.confdir .. "/icons/spiral.png"
-theme.layout_dwindle                            = theme.confdir .. "/icons/dwindle.png"
-theme.layout_max                                = theme.confdir .. "/icons/max.png"
-theme.layout_fullscreen                         = theme.confdir .. "/icons/fullscreen.png"
-theme.layout_magnifier                          = theme.confdir .. "/icons/magnifier.png"
-theme.layout_floating                           = theme.confdir .. "/icons/floating.png"
+theme.layout_tile = theme.confdir .. "/icons/tile.png"
+theme.layout_tilegaps = theme.confdir .. "/icons/tilegaps.png"
+theme.layout_tileleft = theme.confdir .. "/icons/tileleft.png"
+theme.layout_tilebottom = theme.confdir .. "/icons/tilebottom.png"
+theme.layout_tiletop = theme.confdir .. "/icons/tiletop.png"
+theme.layout_fairv = theme.confdir .. "/icons/fairv.png"
+theme.layout_fairh = theme.confdir .. "/icons/fairh.png"
+theme.layout_spiral = theme.confdir .. "/icons/spiral.png"
+theme.layout_dwindle = theme.confdir .. "/icons/dwindle.png"
+theme.layout_max = theme.confdir .. "/icons/max.png"
+theme.layout_fullscreen = theme.confdir .. "/icons/fullscreen.png"
+theme.layout_magnifier = theme.confdir .. "/icons/magnifier.png"
+theme.layout_floating = theme.confdir .. "/icons/floating.png"
 -- theme.titlebar_close_button_normal              = theme.confdir .. "/icons/titlebar/close_normal.png"
 -- theme.titlebar_close_button_focus               = theme.confdir .. "/icons/titlebar/close_focus.png"
 -- theme.titlebar_minimize_button_normal           = theme.confdir .. "/icons/titlebar/minimize_normal.png"
@@ -227,9 +224,7 @@ theme.layout_floating                           = theme.confdir .. "/icons/float
 -- Icons
 -- ========================================================
 -- Generate Awesomewm icon:
-theme.awesome_icon = theme_assets.awesome_icon(
-    theme.menu_height, theme.bg_focus, theme.fg_focus
-)
+theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus, theme.fg_focus)
 
 -- Gtk icon theme
 theme.icon_theme = "Papirus"
@@ -240,6 +235,6 @@ theme.icon_font = "FiraCode Nerd Font "
 
 -- Etc
 -- ========================================================
-theme.useless_gap   = dpi(8)
+theme.useless_gap = dpi(8)
 
 return theme
