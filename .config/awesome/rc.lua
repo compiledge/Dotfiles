@@ -463,8 +463,12 @@ awful.screen.connect_for_each_screen(function(s)
 		-- },
 	})
 
-	-- Criando e gerenciando a tasklist widget
-	s.mytasklist = awful.widget.tasklist({
+	-- Tasklist
+	-- INFO:
+	-- Custom tasklist: show only the WM_CLASS(STRING)
+	local mytasklist = require("mytasklist")
+	s.mytasklist = mytasklist({
+
 		screen = s,
 		filter = awful.widget.tasklist.filter.currenttags,
 		buttons = tasklist_buttons,
