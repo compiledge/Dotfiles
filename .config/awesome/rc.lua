@@ -757,7 +757,7 @@ globalkeys = gears.table.join(
 
 	-- Power Menu
 	awful.key({ modkey }, "/", function()
-		awful.util.spawn("rofi -show power-menu -modi power-menu:~/git/Scripts/archive/rofi-power-menu")
+		awful.spawn.with_shell("~/git/Scripts/rofi-power.sh")
 	end),
 
 	-- Controle de Brilho
