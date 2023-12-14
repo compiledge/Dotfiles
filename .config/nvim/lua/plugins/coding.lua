@@ -24,6 +24,8 @@ return {
 			{ "onsails/lspkind.nvim" }, -- Fancy icons to cmp
 		},
 	},
+
+	-- Integrate nvim-cmp with emojis
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = { "hrsh7th/cmp-emoji" },
@@ -32,6 +34,20 @@ return {
 			table.insert(opts.sources, { name = "emoji" })
 		end,
 	},
+
+	-- Integrate nvim-cmp with ultisnips
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"SirVer/ultisnips",
+			"quangnguyen30192/cmp-nvim-ultisnips",
+		},
+		---@param opts cmp.ConfigSchema
+		opts = function(_, opts)
+			table.insert(opts.sources, { name = "ultisnips" })
+		end,
+	},
+
 	-- -- Use <tab> for completion and snippets (supertab)
 	-- -- first: disable default <tab> and <s-tab> behavior in LuaSnip
 	-- {

@@ -29,7 +29,7 @@ return {
 			require("orgmode").setup({
 
 				-- File and directory list
-				org_agenda_files = { "~/git/org/*" },
+				org_agenda_files = { "~/git/org/*", "~/git/notes/*" },
 				org_default_notes_file = "~/git/org/refile.org",
 
 				win_split_mode = "auto",
