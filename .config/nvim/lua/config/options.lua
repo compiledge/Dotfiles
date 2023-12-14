@@ -16,3 +16,8 @@ vim.opt.spelllang = { "pt_br" }
 
 -- Menu language
 vim.cmd([[language en_US.utf8]])
+
+-- Diagnostic Borders
+vim.diagnostic.config({
+	float = { border = "rounded" },
+})
