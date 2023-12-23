@@ -3,3 +3,4 @@
 docs
 .stow-local-ignore
 .gitignore
+Makefile
