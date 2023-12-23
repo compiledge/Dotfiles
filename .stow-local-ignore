@@ -1,0 +1,5 @@
+# Do not create syslinks with these file and directories
+
+docs
+.stow-local-ignore
+.gitignore
