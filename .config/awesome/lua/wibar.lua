@@ -396,6 +396,7 @@ local taglist_buttons = gears.table.join(
 
 awful.screen.connect_for_each_screen(function(s)
 	local names = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
+	-- local names = { "一", "二", "三", "四", "五", "六", "七", "八", "九" }
 
 	-- Setting the default tag layout
 	local t = awful.layout.suit
@@ -439,14 +440,17 @@ awful.screen.connect_for_each_screen(function(s)
 		screen = s,
 		filter = awful.widget.taglist.filter.all,
 		buttons = taglist_buttons,
+		-- style = {
+		-- 	shape = gears.shape.powerline,
+		-- },
 		-- layout = {
 		-- 	spacing = 16,
 		-- 	spacing_widget = {
-		-- 		color  = "#dddddd",
-		-- 		shape  = gears.shape.powerline,
+		-- 		-- color = "#dddddd",
+		-- 		shape = gears.shape.powerline,
 		-- 		widget = wibox.widget.separator,
 		-- 	},
-		-- 	layout = wibox.layout.fixed.horizontal
+		-- 	layout = wibox.layout.fixed.horizontal,
 		-- },
 		-- widget_template = {
 		-- 	{
@@ -487,7 +491,7 @@ awful.screen.connect_for_each_screen(function(s)
 		-- },
 	})
 
-	-- Tasklist
+	-- Tasklist configuration
 	-- INFO: Custom tasklist: show only the WM_CLASS(STRING)
 	local mytasklist = require("mytasklist")
 	s.mytasklist = mytasklist({
@@ -495,29 +499,10 @@ awful.screen.connect_for_each_screen(function(s)
 		screen = s,
 		filter = awful.widget.tasklist.filter.currenttags,
 		buttons = tasklist_buttons,
-		style = {
-			-- font = theme.font,
-			border_width = 5,
-			border_color = "#FF00FF",
-			-- shape 			= gears.shape.rounded_bar,
-			-- shape 		= helpers.rrect(dpi(4)),
-		},
 		layout = {
-			spacing = dpi(8),
-			-- spacing_widget = {
-			-- 	{
-			-- 		-- forced_width = 15,
-			-- 		text = "--",
-			-- 		-- shape        = gears.shape.circle,
-			-- 		widget       = wibox.widget.textbox
-			-- 	},
-			-- 	valign = 'center',
-			-- 	halign = 'center',
-			-- 	widget = wibox.container.place,
-			-- },
-			-- Cada bloco gasta somente o necessário em tamanho
 			layout = wibox.layout.fixed.horizontal,
 		},
+
 		-- Notice that there is *NO* wibox.wibox prefix, it is a template,
 		-- not a widget instance.
 		widget_template = {
@@ -537,8 +522,10 @@ awful.screen.connect_for_each_screen(function(s)
 					},
 					layout = wibox.layout.fixed.horizontal,
 				},
-				left = 10,
-				right = 10,
+				left = 14,
+				right = 14,
+				top = 3,
+				bottom = 3,
 				widget = wibox.container.margin,
 			},
 			id = "background_role",
@@ -547,18 +534,9 @@ awful.screen.connect_for_each_screen(function(s)
 	})
 
 	-- Create the wibar
-	-- TODO: Move this configuration to the theme file
 	s.mywibox = awful.wibar({
-		stretch = true,
 		position = "top",
 		screen = s,
-		width = 1800,
-		height = 30,
-		opacity = 1,
-		-- bg = "#00000000",
-		-- shape = gears.shape.rounded_rect,
-		border_width = dpi(3),
-		border_color = beautiful.fg_normal,
 	})
 
 	-- Add widgets to the wibar
