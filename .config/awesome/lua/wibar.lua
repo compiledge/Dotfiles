@@ -341,28 +341,6 @@ local taglist_buttons = gears.table.join(
 	end)
 )
 
--- local tasklist_buttons = gears.table.join(
--- awful.button({ }, 1, function (c)
--- 	if c == client.focus then
--- 		c.minimized = true
--- 	else
--- 		c:emit_signal(
--- 		"request::activate",
--- 		"tasklist",
--- 		{raise = true}
--- 		)
--- 	end
--- end),
--- awful.button({ }, 3, function()
--- 	awful.menu.client_list({ theme = { width = 250 } })
--- end),
--- awful.button({ }, 4, function ()
--- 	awful.client.focus.byidx(1)
--- end),
--- awful.button({ }, 5, function ()
--- 	awful.client.focus.byidx(-1)
--- end))
-
 -- Atualização de ícones da taglist
 -- local unfocus_icon = " "
 -- local unfocus_color = "#f8f8f2"
@@ -492,6 +470,29 @@ awful.screen.connect_for_each_screen(function(s)
 	})
 
 	-- Tasklist configuration
+	-- ========================================================
+
+	-- Tasklist buttons
+	local tasklist_buttons = gears.table.join(
+		awful.button({}, 1, function(c)
+			if c == client.focus then
+				c.minimized = true
+			else
+				c:emit_signal("request::activate", "tasklist", { raise = true })
+			end
+		end),
+		awful.button({}, 3, function()
+			awful.menu.client_list({ theme = { width = 250 } })
+		end),
+		awful.button({}, 4, function()
+			awful.client.focus.byidx(1)
+		end),
+		awful.button({}, 5, function()
+			awful.client.focus.byidx(-1)
+		end)
+	)
+
+	-- Tasklist widget
 	-- INFO: Custom tasklist: show only the WM_CLASS(STRING)
 	local mytasklist = require("mytasklist")
 	s.mytasklist = mytasklist({
