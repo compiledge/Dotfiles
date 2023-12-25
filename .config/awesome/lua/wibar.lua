@@ -9,10 +9,18 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
-local lain = require("lain")
 
+-- Dpi metrics
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
+
+-- Vicious widgets
+local vicious = require("vicious")
+vicious.contrib = require("vicious.contrib")
+
+-- Default modkey.
+-- Usually, Mod4 is the key with a logo between Control and Alt.
+local modkey = "Mod4"
 
 -- Icons (Nerdfonts)
 local function make_fa_icon(code, pcolor)
@@ -24,86 +32,276 @@ local function make_fa_icon(code, pcolor)
 		widget = wibox.widget.textbox,
 	})
 end
-local iconDate = make_fa_icon("\u{f274}", beautiful.dblue)
-local iconClock = make_fa_icon("\u{f0996}", beautiful.dblue)
-local iconBat = make_fa_icon("\u{f008f}", beautiful.dblue)
-local iconCpu = make_fa_icon("\u{f0ee0}", beautiful.dblue)
-local iconMem = make_fa_icon("\u{f061a}", beautiful.dblue)
+local icon_calendar = make_fa_icon("\u{eab0}", beautiful.dblue)
+local icon_clock = make_fa_icon("\u{f0996}", beautiful.bg_normal)
+local icon_bat = make_fa_icon("\u{f0e7}", beautiful.yellow)
+local icon_cpu = make_fa_icon("\u{f0ee0}", beautiful.red)
+local icon_mem = make_fa_icon("\u{f51e}", beautiful.orange)
+local icon_org = make_fa_icon("\u{e633}", beautiful.green)
+local icon_cmus = make_fa_icon("\u{f001}", beautiful.purple)
 
-local markup = lain.util.markup
+-- Powerline (inverted) shape
+local pl_shape = function(cr, width, height)
+	gears.shape.powerline(cr, width, height, -15)
+end
 
-local mycpu = lain.widget.cpu({
-	settings = function()
-		widget:set_markup(markup.fontfg(beautiful.icon_font .. "12", beautiful.dblue, cpu_now.usage .. "% "))
-	end,
-})
-local mymemory = lain.widget.mem({
-	settings = function()
-		widget:set_markup(markup.fontfg(beautiful.icon_font .. "12", beautiful.dblue, mem_now.used .. " B "))
-	end,
-})
+-- Powerline separator
+local pl_separator = wibox.widget({
+	{
+		{
+			text = " ",
+			widget = wibox.widget.textbox,
+		},
+		left = 5,
+		right = 5,
+		top = 3,
+		bottom = 3,
+		widget = wibox.container.margin,
+	},
 
-local mybat = lain.widget.bat({
-	settings = function()
-		local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
-
-		-- if bat_now.ac_status == 1 then
-		-- 	perc = perc .. " !"
-		-- end
-		widget:set_markup(markup.fontfg(beautiful.icon_font .. "12", beautiful.dblue, perc .. " "))
-		-- widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
-		bat_notification_charged_preset.title = "Bateria em 100%!"
-		bat_notification_charged_preset.text = "Totalmente recarregada."
-		bat_notification_charged_preset.timeout = 15
-		bat_notification_charged_preset.fg = beautiful.green
-		bat_notification_charged_preset.bg = beautiful.bg_normal
-
-		bat_notification_low_preset.title = "Bateria Baixa!"
-		bat_notification_low_preset.text = "Conecte o carregador."
-		bat_notification_low_preset.timeout = 15
-		bat_notification_low_preset.fg = beautiful.orange
-		bat_notification_low_preset.bg = beautiful.bg_normal
-
-		bat_notification_critical_preset.title = "Bateria Exausta!"
-		bat_notification_critical_preset.text = "Desligamento eminente."
-		bat_notification_critical_preset.timeout = 15
-		bat_notification_critical_preset.fg = beautiful.red
-		bat_notification_critical_preset.bg = beautiful.bg_normal
-	end,
+	shape = pl_shape,
+	fg = beautiful.bg_normal,
+	bg = beautiful.fg_normal,
+	widget = wibox.container.background,
 })
 
-local cmux = wibox.widget({
-	settings = function()
-		widget:set_markup(markup.fontfg("font", beautiful.dblue, "texto M "))
-	end,
+-- Memory widget
+local memwidget = wibox.widget.textbox()
+vicious.cache(vicious.widgets.mem)
+vicious.register(memwidget, vicious.widgets.mem, "$1% ", 13)
+
+local memory_w = wibox.widget({
+	{
+		{
+			{
+				{
+					widget = icon_mem,
+				},
+				{
+					widget = memwidget,
+				},
+				layout = wibox.layout.fixed.horizontal,
+			},
+			left = 10,
+			right = 18,
+			top = 3,
+			bottom = 3,
+			widget = wibox.container.margin,
+		},
+		shape = pl_shape,
+		fg = beautiful.orange,
+		bg = beautiful.altbackground,
+		widget = wibox.container.background,
+	},
+	layout = wibox.layout.align.horizontal,
 })
 
-local iseparator = wibox.widget({
-	markup = '<span foreground="#44475a"><b>|</b></span>',
-	align = "center",
-	valign = "center",
-	widget = wibox.widget.textbox,
+-- CPU widget
+local cpuwidget = wibox.widget.textbox()
+vicious.register(cpuwidget, vicious.widgets.cpu, "$1 % ", 3)
+
+local cpu_w = wibox.widget({
+	{
+		{
+			{
+				{
+					widget = icon_cpu,
+				},
+				{
+					widget = cpuwidget,
+				},
+				layout = wibox.layout.fixed.horizontal,
+			},
+			left = 10,
+			right = 18,
+			top = 3,
+			bottom = 3,
+			widget = wibox.container.margin,
+		},
+		shape = pl_shape,
+		fg = beautiful.orange,
+		bg = beautiful.altbackground,
+		widget = wibox.container.background,
+	},
+	layout = wibox.layout.align.horizontal,
 })
 
-mykeyboardlayout = awful.widget.keyboardlayout() --}}}
+-- Battery widget
+local batwidget = wibox.widget.textbox()
+vicious.register(batwidget, vicious.widgets.bat, "$2 %", 60, "BAT1")
 
--- Clock container
-local bclock = wibox.container.background()
-bclock.widget = wibox.widget.textclock("%H:%M ")
-bclock.fg = beautiful.dblue
+local bat_w = wibox.widget({
+	{
+		{
+			{
+				{
+					widget = icon_bat,
+				},
+				{
+					widget = batwidget,
+				},
+				layout = wibox.layout.fixed.horizontal,
+			},
+			left = 10,
+			right = 18,
+			top = 3,
+			bottom = 3,
+			widget = wibox.container.margin,
+		},
+		shape = pl_shape,
+		fg = beautiful.yellow,
+		bg = beautiful.altbackground,
+		widget = wibox.container.background,
+	},
+	layout = wibox.layout.align.horizontal,
+})
 
--- Calendar container
-local bcalendar = wibox.container.background()
-bcalendar.widget = wibox.widget.textclock("%a %d %b ")
-bcalendar.fg = beautiful.dblue
+-- Org mode widget
+local orgwidget = wibox.widget.textbox()
+vicious.register(orgwidget, vicious.widgets.org, "$4:$1", 60, {
+	"/home/eduardo/git/org/todo.org",
+	"/home/eduardo/git/org/redo.org",
+	"/home/eduardo/git/org/maybe.org",
+	"/home/eduardo/git/org/refile.org",
+	"/home/eduardo/git/org/mobile.org",
+	"/home/eduardo/git/org/notes.org",
+	"/home/eduardo/git/org/phd.org",
+})
 
--- [widget] Calendário{{{
+local org_w = wibox.widget({
+	{
+		{
+			{
+				{
+					widget = icon_org,
+				},
+				{
+					widget = orgwidget,
+				},
+				layout = wibox.layout.fixed.horizontal,
+			},
+			left = 10,
+			right = 22,
+			top = 3,
+			bottom = 3,
+			widget = wibox.container.margin,
+		},
+		shape = pl_shape,
+		fg = beautiful.green,
+		bg = beautiful.altbackground,
+		widget = wibox.container.background,
+	},
+	layout = wibox.layout.align.horizontal,
+})
+
+-- Cmus widget
+local cmuswidget = wibox.widget.textbox()
+vicious.register(cmuswidget, vicious.contrib.cmus, "${title}", nil, "${title}")
+
+local cmus_w = wibox.widget({
+	{
+		{
+			{
+				{
+					widget = icon_cmus,
+				},
+				{
+					widget = cmuswidget,
+				},
+				layout = wibox.layout.fixed.horizontal,
+			},
+			left = 10,
+			right = 22,
+			top = 3,
+			bottom = 3,
+			widget = wibox.container.margin,
+		},
+		shape = pl_shape,
+		fg = beautiful.purple,
+		bg = beautiful.altbackground,
+		widget = wibox.container.background,
+	},
+	layout = wibox.layout.align.horizontal,
+})
+
+-- Clock widget
+local clock_w = wibox.widget({
+	{
+		{
+			{
+				{
+					widget = icon_clock,
+				},
+				{
+					widget = wibox.widget.textclock("%H:%M ", 60),
+				},
+				layout = wibox.layout.fixed.horizontal,
+			},
+			left = 10,
+			right = 15,
+			top = 3,
+			bottom = 3,
+			widget = wibox.container.margin,
+		},
+		shape = pl_shape,
+		fg = beautiful.bg_normal,
+		bg = beautiful.dblue,
+		widget = wibox.container.background,
+	},
+	layout = wibox.layout.align.horizontal,
+})
+
+-- Calendar widget
+local calendar_w = wibox.widget({
+	{
+		{
+			{
+				{
+					widget = icon_calendar,
+				},
+				{
+					widget = wibox.widget.textclock("%a %d %b ", 60),
+				},
+				layout = wibox.layout.fixed.horizontal,
+			},
+			left = 10,
+			right = 15,
+			top = 3,
+			bottom = 3,
+			widget = wibox.container.margin,
+		},
+		shape = pl_shape,
+		fg = beautiful.dblue,
+		bg = beautiful.altbackground,
+		widget = wibox.container.background,
+	},
+	layout = wibox.layout.align.horizontal,
+})
+
+-- Systray widget
+local system_w = wibox.widget({
+	{
+		{
+			{
+				widget = wibox.widget.systray(),
+			},
+			left = 15,
+			right = 15,
+			top = 3,
+			bottom = 3,
+			widget = wibox.container.margin,
+		},
+		shape = pl_shape,
+		fg = beautiful.dblue,
+		bg = beautiful.background,
+		widget = wibox.container.background,
+	},
+	layout = wibox.layout.align.horizontal,
+})
+
+--Calendar popup widget
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
--- ...
--- Create a textclock widget
-mytextclock = wibox.widget.textclock()
 
--- or customized
 local cw = calendar_widget({
 	theme = "naughty",
 	placement = "top_right",
@@ -113,15 +311,11 @@ local cw = calendar_widget({
 	previous_month_button = 1,
 	next_month_button = 3,
 })
-bcalendar:connect_signal("button::press", function(_, _, _, button)
+calendar_w:connect_signal("button::press", function(_, _, _, button)
 	if button == 1 then
 		cw.toggle()
 	end
 end)
---}}}
-
--- Battery Widget
-local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -203,18 +397,18 @@ local taglist_buttons = gears.table.join(
 awful.screen.connect_for_each_screen(function(s)
 	local names = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
 
-	-- Select the default tag layout
+	-- Setting the default tag layout
 	local t = awful.layout.suit
 	local layouts = {
 		t.tile, -- Tag 1
 		t.tile, -- Tag 2
-		t.tile,
-		t.tile,
-		t.tile,
-		t.tile,
-		t.tile,
-		t.tile,
-		t.tile,
+		t.tile, -- Tag 3
+		t.tile, -- Tag 4
+		t.tile, -- Tag 5
+		t.tile, -- Tag 6
+		t.tile, -- Tag 7
+		t.tile, -- Tag 8
+		t.tile, -- Tag 9
 	}
 
 	-- create the tag collection
@@ -355,14 +549,14 @@ awful.screen.connect_for_each_screen(function(s)
 	-- Create the wibar
 	-- TODO: Move this configuration to the theme file
 	s.mywibox = awful.wibar({
-		stretch = false,
+		stretch = true,
 		position = "top",
 		screen = s,
 		width = 1800,
 		height = 30,
 		opacity = 1,
 		-- bg = "#00000000",
-		shape = gears.shape.rounded_rect,
+		-- shape = gears.shape.rounded_rect,
 		border_width = dpi(3),
 		border_color = beautiful.fg_normal,
 	})
@@ -378,23 +572,21 @@ awful.screen.connect_for_each_screen(function(s)
 		},
 		s.mytasklist, -- Middle part
 		{ -- Right part
+			spacing = -15,
 			layout = wibox.layout.fixed.horizontal,
-			iconCpu,
-			mycpu,
-			iseparator,
-			iconMem,
-			mymemory,
-			iseparator,
-			iconBat,
-			mybat,
-			iseparator,
-			iconDate,
-			bcalendar,
-			iseparator,
-			iconClock,
-			bclock,
-			iseparator,
-			wibox.widget.systray(),
+			cmus_w,
+			pl_separator,
+			org_w,
+			pl_separator,
+			cpu_w,
+			pl_separator,
+			memory_w,
+			pl_separator,
+			bat_w,
+			pl_separator,
+			calendar_w,
+			clock_w,
+			system_w,
 			s.mylayoutbox,
 		},
 	})

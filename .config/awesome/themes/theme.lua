@@ -45,6 +45,7 @@ theme.orange = "#ff966c"
 theme.cyan = "#4fd6be"
 theme.dred = "#c53b53"
 theme.comments = "#828bb8"
+theme.altbackground = "#3b4261"
 theme.transparent = "#00000000"
 
 -- Basic colors config

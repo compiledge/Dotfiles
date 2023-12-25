@@ -110,6 +110,8 @@ awful.layout.layouts = {
 --     }
 -- }
 
+mykeyboardlayout = awful.widget.keyboardlayout()
+
 require("lua/wibar")
 
 -- {{{ Mouse bindings
