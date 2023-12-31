@@ -61,7 +61,7 @@ local pl_separator = wibox.widget({
 
 	shape = pl_shape,
 	fg = beautiful.bg_normal,
-	bg = beautiful.fg_normal,
+	bg = beautiful.altfocus,
 	widget = wibox.container.background,
 })
 
@@ -98,7 +98,7 @@ local memory_w = wibox.widget({
 
 -- CPU widget
 local cpuwidget = wibox.widget.textbox()
-vicious.register(cpuwidget, vicious.widgets.cpu, "$1 % ", 3)
+vicious.register(cpuwidget, vicious.widgets.cpu, "$1% ", 3)
 
 local cpu_w = wibox.widget({
 	{
@@ -128,7 +128,7 @@ local cpu_w = wibox.widget({
 
 -- Battery widget
 local batwidget = wibox.widget.textbox()
-vicious.register(batwidget, vicious.widgets.bat, "$2 %", 60, "BAT1")
+vicious.register(batwidget, vicious.widgets.bat, "$2% ", 60, "BAT1")
 
 local bat_w = wibox.widget({
 	{
