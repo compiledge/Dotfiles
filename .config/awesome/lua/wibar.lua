@@ -413,6 +413,9 @@ awful.screen.connect_for_each_screen(function(s)
 		end)
 	))
 
+	-- Wrap layoutbox in a margin container with imperative syntax
+	s.mylayoutbox = wibox.container.margin(s.mylayoutbox, 3, 3, 3, 3)
+
 	-- Create a taglist widget
 	s.mytaglist = awful.widget.taglist({
 		screen = s,
