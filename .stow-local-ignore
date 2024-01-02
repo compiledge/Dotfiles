@@ -4,3 +4,4 @@ docs
 .stow-local-ignore
 .gitignore
 Makefile
+README.md
