@@ -1,7 +1,6 @@
 -- Imports
 -- ========================================================
 local gears = require("gears")
-local lain = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
 local dpi = require("beautiful.xresources").apply_dpi
@@ -45,6 +44,8 @@ theme.orange = "#ff966c"
 theme.cyan = "#4fd6be"
 theme.dred = "#c53b53"
 theme.comments = "#828bb8"
+theme.altfocus = "#8c94ab"
+theme.altbackground = "#3b4261"
 theme.transparent = "#00000000"
 
 -- Basic colors config
@@ -93,8 +94,11 @@ theme.taglist_font = theme.wibar_font
 
 -- Task List config
 -- ========================================================
-theme.tasklist_fg_focus = theme.bg_focus
-theme.tasklist_bg_focus = theme.bg_normal
+theme.tasklist_fg_normal = theme.fg_normal
+theme.tasklist_bg_normal = theme.altbackground
+
+theme.tasklist_fg_focus = theme.bg_normal
+theme.tasklist_bg_focus = theme.dblue
 
 theme.tasklist_fg_urgent = theme.urgent
 theme.tasklist_bg_urgent = theme.bg_normal
@@ -103,6 +107,10 @@ theme.tasklist_disable_task_name = false
 theme.tasklist_plain_task_name = false
 theme.tasklist_disable_icon = false
 theme.tasklist_align = "center"
+
+theme.tasklist_spacing = -15
+theme.tasklist_shape = gears.shape.powerline
+theme.tasklist_font = "VictorMono Nerd Font 12"
 
 -- Prompt config
 -- ========================================================
@@ -146,7 +154,7 @@ theme.hotkeys_opacity = 10
 
 -- Notifications config
 -- ========================================================
-theme.notification_fg = theme.purple
+theme.notification_fg = theme.fg_normal
 theme.notification_bg = theme.bg_normal
 
 -- theme.notification_width = dpi(500)
@@ -155,7 +163,7 @@ theme.notification_bg = theme.bg_normal
 -- theme.notification_shape = ?
 theme.notification_opacity = 2
 
-theme.notification_border_color = theme.purple
+theme.notification_border_color = theme.fg_normal
 theme.notification_border_width = dpi(3)
 
 theme.notification_font = theme.font_prompt
@@ -184,6 +192,17 @@ theme.border_radius = dpi(15)
 theme.widget_border_width = dpi(2)
 theme.widget_border_color = theme.cyan
 -- theme.border_marked = "#6272a4"
+
+-- Wibar
+-- ========================================================
+theme.wibar_stretch = true
+theme.wibar_width = 1800
+theme.wibar_height = 30
+theme.wibar_opacity = 1
+-- theme.wibar_bg = "#00000000",
+-- theme.wibar_shape = gears.shape.rounded_rect,
+theme.wibar_border_width = dpi(3)
+theme.wibar_border_color = theme.fg_normal
 
 -- Awesomewm Icons (Tiles)
 -- ========================================================
