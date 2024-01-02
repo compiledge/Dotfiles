@@ -6,8 +6,8 @@
 --
 
 -- Help to use coounts
-local discipline = require("utils.discipline")
-discipline.cowboy()
+-- local discipline = require("utils.discipline")
+-- discipline.cowboy()
 
 -- Reselect pasted text
 vim.keymap.set("n", "gp", "`[v`]", { desc = "Select pasted text" })
