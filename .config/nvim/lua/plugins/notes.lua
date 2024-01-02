@@ -29,7 +29,7 @@ return {
 			require("orgmode").setup({
 
 				-- File and directory list
-				org_agenda_files = { "~/git/org/*", "~/git/notes/*" },
+				org_agenda_files = { "~/git/org/*.org", "~/git/notes/*.org" },
 				org_default_notes_file = "~/git/org/refile.org",
 
 				win_split_mode = "auto",
@@ -54,18 +54,23 @@ return {
 				},
 
 				org_highlight_latex_and_related = "entities",
-				-- org_capture_templates = {
-				--  t = {
-				-- 	 description = 'Todo',
-				-- 	 template = '* TODO %?\n',
-				-- 	 target = '~/git/org/refile.org'
-				--  },
-				--  n = {
-				-- 	 description = 'Note',
-				-- 	 template = '* INFO %?\n',
-				-- 	 target = '~/git/org/refile.org'
-				--  },
-				-- },
+				org_capture_templates = {
+					t = {
+						description = "Todo",
+						template = "* NEXT %?\n",
+						target = "~/git/org/refile.org",
+					},
+					j = {
+						description = "Journal",
+						template = "\n* %<%Y-%m-%d>: %?",
+						target = "~/git/notes/journal/%<%Y-%m-%d>.org",
+					},
+					-- n = {
+					-- 	description = "Note",
+					-- 	template = "* INFO %?\n",
+					-- 	target = "~/git/org/refile.org",
+					-- },
+				},
 			})
 		end,
 	},
