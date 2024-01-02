@@ -154,7 +154,7 @@ theme.hotkeys_opacity = 10
 
 -- Notifications config
 -- ========================================================
-theme.notification_fg = theme.purple
+theme.notification_fg = theme.fg_normal
 theme.notification_bg = theme.bg_normal
 
 -- theme.notification_width = dpi(500)
@@ -163,7 +163,7 @@ theme.notification_bg = theme.bg_normal
 -- theme.notification_shape = ?
 theme.notification_opacity = 2
 
-theme.notification_border_color = theme.purple
+theme.notification_border_color = theme.fg_normal
 theme.notification_border_width = dpi(3)
 
 theme.notification_font = theme.font_prompt

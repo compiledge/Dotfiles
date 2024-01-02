@@ -299,24 +299,6 @@ local system_w = wibox.widget({
 	layout = wibox.layout.align.horizontal,
 })
 
---Calendar popup widget
-local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
-
-local cw = calendar_widget({
-	theme = "naughty",
-	placement = "top_right",
-	start_sunday = true,
-	radius = 8,
-	-- with customized next/previous (see table above)
-	previous_month_button = 1,
-	next_month_button = 3,
-})
-calendar_w:connect_signal("button::press", function(_, _, _, button)
-	if button == 1 then
-		cw.toggle()
-	end
-end)
-
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
 	awful.button({}, 1, function(t)
