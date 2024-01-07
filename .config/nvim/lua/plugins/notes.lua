@@ -62,7 +62,7 @@ return {
 					},
 					j = {
 						description = "Journal",
-						template = "\n* %<%Y-%m-%d>: %?",
+						template = "\n* %<%A, %Y-%m-%d %H:%M>: %?",
 						target = "~/git/notes/journal/%<%Y-%m-%d>.org",
 					},
 					-- n = {
