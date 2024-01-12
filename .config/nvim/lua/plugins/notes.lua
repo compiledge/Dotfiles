@@ -158,4 +158,12 @@ return {
 			},
 		},
 	},
+
+	{
+		"dhruvasagar/vim-table-mode",
+		keys = {
+			{ "<leader>tm", "<Cmd> TableModeToggle <CR>", desc = "Table Mode" },
+			-- { "<leader>tt", "<Cmd> Tableize <CR>", desc = "Tableize" },
+		},
+	},
 }
