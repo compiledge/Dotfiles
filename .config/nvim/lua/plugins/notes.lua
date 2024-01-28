@@ -116,7 +116,7 @@ return {
 
 	{
 		--Integration for orgmode with telescope.nvim.
-		"joaomsa/telescope-orgmode.nvim",
+		"lyz-code/telescope-orgmode.nvim",
 		dependencies = { "telescope.nvim" },
 		ft = { "org" },
 		config = function()
