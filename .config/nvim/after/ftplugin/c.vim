@@ -1,10 +1,8 @@
-"  ██████╗
-" ██╔════╝
-" ██║     
-" ██║     
-" ╚██████╗
-"  ╚═════╝
-"         
+"
+" ░█▀▀░░░░█░█░▀█▀░█▄█
+" ░█░░░░░░▀▄▀░░█░░█░█
+" ░▀▀▀░▀░░░▀░░▀▀▀░▀░▀
+"
 " Make shortcuts
 noremap <F2> :make<CR>
 inoremap <F2> :make<CR>
@@ -15,5 +13,5 @@ inoremap <F3> :make clean<CR>
 " autocmd BufWritePost * call system("ctags -R")
 
 " Local sets
-set signcolumn=yes	" Add a column on the left. Useful for linting
-set colorcolumn=80	" Draws a line at the given line to keep aware of the line size
+" set signcolumn=yes	" Add a column on the left. Useful for linting
+" set colorcolumn=80	" Draws a line at the given line to keep aware of the line size

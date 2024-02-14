@@ -29,8 +29,8 @@ return {
 			require("orgmode").setup({
 
 				-- File and directory list
-				org_agenda_files = { "~/git/org/*", "~/git/notes/*" },
-				org_default_notes_file = "~/git/org/refile.org",
+				org_agenda_files = { "~/org/*.org", "~/git/wiki/*.org" },
+				org_default_notes_file = "~/org/refile.org",
 
 				win_split_mode = "auto",
 
@@ -54,18 +54,23 @@ return {
 				},
 
 				org_highlight_latex_and_related = "entities",
-				-- org_capture_templates = {
-				--  t = {
-				-- 	 description = 'Todo',
-				-- 	 template = '* TODO %?\n',
-				-- 	 target = '~/git/org/refile.org'
-				--  },
-				--  n = {
-				-- 	 description = 'Note',
-				-- 	 template = '* INFO %?\n',
-				-- 	 target = '~/git/org/refile.org'
-				--  },
-				-- },
+				org_capture_templates = {
+					t = {
+						description = "Todo",
+						template = "* NEXT %?\n",
+						target = "~/org/refile.org",
+					},
+					j = {
+						description = "Journal",
+						template = "\n* %<%A, %Y-%m-%d %H:%M>: %?",
+						target = "~/git/wiki/journal/%<%Y-%m-%d>.org",
+					},
+					-- n = {
+					-- 	description = "Note",
+					-- 	template = "* INFO %?\n",
+					-- 	target = "~/git/org/refile.org",
+					-- },
+				},
 			})
 		end,
 	},
@@ -111,7 +116,7 @@ return {
 
 	{
 		--Integration for orgmode with telescope.nvim.
-		"joaomsa/telescope-orgmode.nvim",
+		"lyz-code/telescope-orgmode.nvim",
 		dependencies = { "telescope.nvim" },
 		ft = { "org" },
 		config = function()
@@ -151,6 +156,14 @@ return {
 					global_files = { "~/git/bib/" },
 				},
 			},
+		},
+	},
+
+	{
+		"dhruvasagar/vim-table-mode",
+		keys = {
+			{ "<leader>tm", "<Cmd> TableModeToggle <CR>", desc = "Table Mode" },
+			-- { "<leader>tt", "<Cmd> Tableize <CR>", desc = "Tableize" },
 		},
 	},
 }

@@ -131,6 +131,9 @@ return {
 		"echasnovski/mini.animate",
 		event = "VeryLazy",
 		opts = function(_, opts)
+			opts.scroll = {
+				enable = false,
+			}
 			opts.open = {
 				enable = false,
 			}
@@ -138,5 +141,16 @@ return {
 				enable = false,
 			}
 		end,
+	},
+
+	{
+		{
+			"echasnovski/mini.map",
+			version = false,
+			config = function()
+				require("mini.map").setup()
+				vim.keymap.set("n", "<Leader>tM", MiniMap.toggle, { desc = "MiniMap Toggle" })
+			end,
+		},
 	},
 }
