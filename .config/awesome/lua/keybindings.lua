@@ -105,6 +105,11 @@ globalkeys = gears.table.join(
 	end, { description = "run prompt", group = "launcher" }),
 
 	-- Custom keybindins:
+	-- Fast search with zenity
+	awful.key({ modkey }, "g", function()
+		awful.spawn.with_shell("~/git/Scripts/firefox-search.sh")
+	end, { ... }),
+
 	-- Rofi menu to dirs to ranger file manager
 	awful.key({ modkey }, "o", function()
 		awful.spawn.with_shell("~/git/Scripts/rofi-dirs.sh ranger")
@@ -123,6 +128,11 @@ globalkeys = gears.table.join(
 	-- Rofi menu to programs
 	awful.key({ modkey }, "p", function()
 		awful.spawn.with_shell("rofi -show drun &>> /tmp/rofi.log")
+	end, { ... }),
+
+	-- Rofi menu to emojis
+	awful.key({ modkey }, "ç", function()
+		awful.spawn.with_shell("rofi -modi emoji -show emoji &>> /tmp/rofi.log")
 	end, { ... }),
 
 	-- Block screen
@@ -151,8 +161,8 @@ globalkeys = gears.table.join(
 	end, { ... }),
 
 	-- Toggle conky
-	awful.key({ modkey }, "ç", function()
-		awful.spawn.with_shell("~/.conky/conkyRestart.sh")
+	awful.key({ modkey, "Control" }, "ç", function()
+		awful.spawn.with_shell("~/git/Scripts/conky-toggle.sh")
 	end, { ... }),
 
 	awful.key({ modkey }, "x", function()
@@ -231,8 +241,9 @@ clientkeys = gears.table.join(
 	awful.key({ modkey, "Control" }, "Return", function(c)
 		c:swap(awful.client.getmaster())
 	end, { description = "move to master", group = "client" }),
-	-- awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
-	-- {description = "move to screen", group = "client"}),
+	awful.key({ modkey }, "y", function(c)
+		c:move_to_screen()
+	end, { description = "move to screen", group = "client" }),
 	awful.key({ modkey }, "t", function(c)
 		c.ontop = not c.ontop
 	end, { description = "toggle keep on top", group = "client" }),

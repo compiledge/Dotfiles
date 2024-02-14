@@ -81,6 +81,7 @@ awful.rules.rules = {
 	{
 		rule = { instance = "feh" },
 		properties = {
+			tag = "9",
 			focus = false,
 			floating = false,
 		},
