@@ -29,8 +29,8 @@ return {
 			require("orgmode").setup({
 
 				-- File and directory list
-				org_agenda_files = { "~/git/org/*.org", "~/git/notes/*.org" },
-				org_default_notes_file = "~/git/org/refile.org",
+				org_agenda_files = { "~/org/*.org", "~/git/wiki/*.org" },
+				org_default_notes_file = "~/org/refile.org",
 
 				win_split_mode = "auto",
 
@@ -58,12 +58,12 @@ return {
 					t = {
 						description = "Todo",
 						template = "* NEXT %?\n",
-						target = "~/git/org/refile.org",
+						target = "~/org/refile.org",
 					},
 					j = {
 						description = "Journal",
 						template = "\n* %<%A, %Y-%m-%d %H:%M>: %?",
-						target = "~/git/notes/journal/%<%Y-%m-%d>.org",
+						target = "~/git/wiki/journal/%<%Y-%m-%d>.org",
 					},
 					-- n = {
 					-- 	description = "Note",
