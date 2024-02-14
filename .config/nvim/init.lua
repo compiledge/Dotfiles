@@ -4,3 +4,4 @@
 -- ░▀▀▀░▀░▀░▀▀▀░░▀░░▀░░▀▀▀░▀▀▀░▀░▀
 --
 require("config.lazy")
+require("config.templates")

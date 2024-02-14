@@ -6,8 +6,14 @@
 --
 
 -- Help to use coounts
-local discipline = require("utils.discipline")
-discipline.cowboy()
+-- local discipline = require("utils.discipline")
+-- discipline.cowboy()
+
+-- Toggle Hybrid line numbers
+vim.keymap.set("n", "<leader>tL", function()
+	vim.o.number = not vim.o.number
+	vim.o.relativenumber = not vim.o.relativenumber
+end, { desc = "Hybrid Line Numbers" })
 
 -- Reselect pasted text
 vim.keymap.set("n", "gp", "`[v`]", { desc = "Select pasted text" })

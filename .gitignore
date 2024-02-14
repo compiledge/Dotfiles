@@ -3,6 +3,9 @@
 .conky
 .profile
 pt.utf-8.spl
+pt.utf-8.add
+en.utf-8.add
+en.utf-8.add.spl
 lazy-lock.json
 .luarc.json
 lazyvim.json
