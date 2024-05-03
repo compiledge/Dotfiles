@@ -158,13 +158,13 @@ local bat_w = wibox.widget({
 
 -- Org mode widget
 local orgwidget = wibox.widget.textbox()
-vicious.register(orgwidget, vicious.widgets.org, "$3:$1", 60, {
-	"/home/eduardo/org/todo.org",
-	"/home/eduardo/org/redo.org",
-	"/home/eduardo/org/refile.org",
-	"/home/eduardo/org/mobile.org",
-	"/home/eduardo/org/notes.org",
-	"/home/eduardo/org/phd.org",
+vicious.register(orgwidget, vicious.widgets.org, "$2:$1", 60, {
+	"/home/eduardo/git/org/todo.org",
+	"/home/eduardo/git/org/redo.org",
+	"/home/eduardo/git/org/refile.org",
+	"/home/eduardo/git/org/mobile.org",
+	"/home/eduardo/git/org/notes.org",
+	"/home/eduardo/git/org/phd.org",
 })
 
 local org_w = wibox.widget({
