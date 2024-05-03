@@ -137,13 +137,13 @@ theme.prompt_font = theme.font_prompt
 theme.hotkeys_fg = theme.fg_normal
 theme.hotkeys_bg = theme.bg_normal
 
-theme.hotkeys_border_color = theme.ddblue
+theme.hotkeys_border_color = theme.fg_normal
 theme.hotkeys_border_width = dpi(3)
 
 theme.hotkeys_font = theme.font
 theme.hotkeys_description_font = theme.font
 
-theme.hotkeys_modifiers_fg = theme.lblue
+theme.hotkeys_modifiers_fg = theme.dblue
 theme.hotkeys_label_fg = theme.bg_normal
 theme.hotkeys_label_bg = theme.fg_normal
 theme.hotkeys_opacity = 10
