@@ -103,7 +103,7 @@ theme.tasklist_bg_focus = theme.dblue
 theme.tasklist_fg_urgent = theme.urgent
 theme.tasklist_bg_urgent = theme.bg_normal
 
-theme.tasklist_disable_task_name = false
+theme.tasklist_disable_task_name = true
 theme.tasklist_plain_task_name = false
 theme.tasklist_disable_icon = false
 theme.tasklist_align = "center"
