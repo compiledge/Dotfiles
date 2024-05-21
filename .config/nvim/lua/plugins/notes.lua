@@ -8,29 +8,13 @@ return {
 	{
 		--Orgmode clone written in Lua for Neovim 0.9+
 		"nvim-orgmode/orgmode",
-		dependencies = {
-			{ "nvim-treesitter/nvim-treesitter", lazy = true },
-		},
 		event = "VeryLazy",
 		config = function()
-			-- Load treesitter grammar for org
-			require("orgmode").setup_ts_grammar()
-
-			-- Setup treesitter
-			require("nvim-treesitter.configs").setup({
-
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = { "org" },
-				},
-				ensure_installed = { "org" },
-			})
-
 			require("orgmode").setup({
 
 				-- File and directory list
-				org_agenda_files = { "~/org/*.org", "~/git/wiki/*.org" },
-				org_default_notes_file = "~/org/refile.org",
+				org_agenda_files = "~/git/org/**/*",
+				org_default_notes_file = "~/git/org/refile.org",
 
 				win_split_mode = "auto",
 
@@ -79,6 +63,24 @@ return {
 		"hrsh7th/nvim-cmp",
 		opts = function(_, opts)
 			table.insert(opts.sources, { name = "orgmode" })
+		end,
+	},
+
+	{
+		"chipsenkbeil/org-roam.nvim",
+		lazy = true,
+		ft = { "org" },
+		tag = "0.1.0",
+		dependencies = {
+			{
+				"nvim-orgmode/orgmode",
+				tag = "0.3.4",
+			},
+		},
+		config = function()
+			require("org-roam").setup({
+				directory = "~/git/org/wiki/",
+			})
 		end,
 	},
 
@@ -146,17 +148,18 @@ return {
 		-- Search and paste entries from *.bib files with telescope.nvim.
 		"nvim-telescope/telescope-bibtex.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim" },
-		ft = { "markdown", "org" },
-		keys = {
-			{ "<leader>fB", "<Cmd> Telescope bibtex <CR>", desc = "Find Bibtex" },
-		},
-		opts = {
-			extensions = {
-				bibtex = {
-					global_files = { "~/git/bib/" },
+		ft = { "markdown", "org", "tex" },
+		config = function()
+			require("telescope").setup({
+				extensions = {
+					bibtex = {
+						global_files = { "~/git/bib/" },
+					},
 				},
-			},
-		},
+			})
+			require("telescope").load_extension("bibtex")
+			vim.keymap.set("n", "<leader>fB", "<Cmd> Telescope bibtex <CR>", { desc = "find bibtex" })
+		end,
 	},
 
 	{
@@ -165,5 +168,55 @@ return {
 			{ "<leader>tm", "<Cmd> TableModeToggle <CR>", desc = "Table Mode" },
 			-- { "<leader>tt", "<Cmd> Tableize <CR>", desc = "Tableize" },
 		},
+	},
+
+	{
+		-- Provide stupidly fast partial code testing for interpreted and compiled languages
+		"michaelb/sniprun",
+		branch = "master",
+
+		build = "sh install.sh",
+		-- do 'sh install.sh 1' if you want to force compile locally
+		-- (instead of fetching a binary from the github release). Requires Rust >= 1.65
+
+		config = function()
+			require("sniprun").setup({
+				-- your options
+			})
+		end,
+	},
+
+	{
+		"jbyuki/venn.nvim",
+		keys = {
+			{ "<leader>tv", "<Cmd> set virtualedit=all <CR>", desc = "Venn Mode" },
+		},
+	},
+
+	{
+		"mistricky/codesnap.nvim",
+		build = "make",
+		opts = {
+			mac_window_bar = true,
+			title = "CodeSnap.nvim",
+			code_font_family = "FiraMono Nerd Font",
+			watermark_font_family = "Pacifico",
+			watermark = "@compiledge",
+			bg_color = "#535c68",
+			breadcrumbs_separator = "/",
+			has_breadcrumbs = false,
+		},
+	},
+
+	{
+		"michaelrommel/nvim-silicon",
+		lazy = true,
+		cmd = "Silicon",
+		config = function()
+			require("silicon").setup({
+				-- Configuration here, or leave empty to use defaults
+				font = "VictorMono NF=34;FiraCode Nerd Font=34",
+			})
+		end,
 	},
 }
