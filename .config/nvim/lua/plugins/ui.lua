@@ -9,6 +9,7 @@ return {
 		-- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu.
 		"folke/noice.nvim",
 		event = "VeryLazy",
+		enabled = false,
 		opts = {
 			-- add any options here
 		},
@@ -118,7 +119,7 @@ return {
 			opts.config.header = vim.split(logo, "\n")
 
 			table.insert(opts.config.center, 6, {
-				action = [[lua require("orgmode.api.agenda").agenda()]],
+				action = 'lua require("orgmode.api.agenda").agenda()',
 				desc = " Org Agenda",
 				icon = " ",
 				key = "o",
@@ -152,5 +153,10 @@ return {
 				vim.keymap.set("n", "<Leader>tM", MiniMap.toggle, { desc = "MiniMap Toggle" })
 			end,
 		},
+	},
+
+	{
+		"akinsho/bufferline.nvim",
+		enabled = false,
 	},
 }
