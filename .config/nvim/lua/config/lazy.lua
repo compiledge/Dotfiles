@@ -17,9 +17,14 @@ require("lazy").setup({
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
 		-- import any extras modules here
 		{ import = "lazyvim.plugins.extras.lang.clangd" },
+		{ import = "lazyvim.plugins.extras.lang.java" },
+		{ import = "lazyvim.plugins.extras.lang.python" },
 		{ import = "lazyvim.plugins.extras.lang.markdown" },
 		{ import = "lazyvim.plugins.extras.lang.tex" },
 		{ import = "lazyvim.plugins.extras.ui.mini-animate" },
+		{ import = "lazyvim.plugins.extras.coding.mini-surround" },
+		{ import = "lazyvim.plugins.extras.editor.outline" },
+		{ import = "lazyvim.plugins.extras.coding.luasnip" },
 
 		-- import/override with your plugins
 		{ import = "plugins" },
@@ -32,6 +37,10 @@ require("lazy").setup({
 		-- have outdated releases, which may break your Neovim install.
 		version = false, -- always use the latest git commit
 		-- version = "*", -- try installing the latest stable version for plugins that support semver
+	},
+	ui = {
+		backdrop = 100,
+		border = "rounded",
 	},
 	install = { colorscheme = { "tokyonight", "habamax" } },
 	checker = { enabled = true }, -- automatically check for plugin updates
