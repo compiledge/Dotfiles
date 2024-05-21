@@ -21,9 +21,10 @@ setopt appendhistory
 
 # Alias
 alias ls='ls --color=always'
-alias ll='exa --icons --color=always'
+alias ll='exa --long --icons --color=always --git'
 alias bat='batcat --theme Dracula'
 alias zat='zathura'
+alias apt-up='sudo apt update && sudo apt upgrade -y'
 
 # Alias to pytho3
 alias python='/usr/bin/python3'
@@ -42,6 +43,9 @@ source ~/.powerlevel10k/powerlevel10k.zsh-theme
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+# Zoxide
+eval "$(zoxide init zsh)" # --cmd (alias to cd in recent versions)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
