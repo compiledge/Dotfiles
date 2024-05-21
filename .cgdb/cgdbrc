@@ -1,0 +1,11 @@
+#
+# ░█▀▀░█▀▀░█▀▄░█▀▄░█▀▄░█▀▀
+# ░█░░░█░█░█░█░█▀▄░█▀▄░█░░
+# ░▀▀▀░▀▀▀░▀▀░░▀▀░░▀░▀░▀▀▀
+#
+set autosourcereload
+set wso=vertical
+set hlsearch
+set ignorecase
+set tabstop=2
+set wrapscan

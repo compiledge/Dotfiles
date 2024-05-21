@@ -21,3 +21,18 @@ vim.cmd([[language en_US.utf8]])
 vim.diagnostic.config({
 	float = { border = "rounded" },
 })
+
+-- Opening help in vertical
+vim.cmd([[
+augroup vertical_help
+  " Open :help in vertical split instead of horizontal
+  autocmd!
+  autocmd FileType help
+        \ setlocal bufhidden=unload |
+        \ wincmd L |
+        \ vertical resize 80
+augroup END
+]])
+
+local opt = vim.opt
+opt.pumblend = 0 -- Popup blend

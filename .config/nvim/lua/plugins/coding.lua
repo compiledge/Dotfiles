@@ -13,26 +13,18 @@ return {
 			local cmp_window = require("cmp.config.window")
 			cmp.setup({
 				window = {
-					completion = cmp_window.bordered(),
-					documentation = cmp_window.bordered(),
+					completion = cmp_window.bordered({
+						winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+					}),
+					documentation = cmp_window.bordered({
+						winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+					}),
 				},
 			})
-
-			vim.opt.pumblend = 0 -- Transparence on nvim-cmp windows
 		end,
 		dependencies = {
 			{ "onsails/lspkind.nvim" }, -- Fancy icons to cmp
 		},
-	},
-
-	-- Integrate nvim-cmp with emojis
-	{
-		"hrsh7th/nvim-cmp",
-		dependencies = { "hrsh7th/cmp-emoji" },
-		---@param opts cmp.ConfigSchema
-		opts = function(_, opts)
-			table.insert(opts.sources, { name = "emoji" })
-		end,
 	},
 
 	-- Integrate nvim-cmp with ultisnips
@@ -48,6 +40,13 @@ return {
 		end,
 	},
 
+	{
+		"L3MON4D3/LuaSnip",
+		init = function()
+			require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/LuaSnip/" })
+			-- require("luasnip.loaders.from_lua").lazy_load({ paths = "~.config/nvim/LuaSnip/" })
+		end,
+	},
 	-- -- Use <tab> for completion and snippets (supertab)
 	-- -- first: disable default <tab> and <s-tab> behavior in LuaSnip
 	-- {
@@ -112,7 +111,7 @@ return {
 				"bash",
 				"c",
 				"html",
-				"org",
+				-- "org",
 				"latex",
 				"javascript",
 				"json",
@@ -136,8 +135,24 @@ return {
 	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		init = function()
+			vim.keymap.set("n", "<leader>fC", "<cmd> TodoTelescope <CR>", { desc = "Find Comments" })
+		end,
 		opts = {
-			vim.keymap.set("n", "<leader>fC", "<cmd> TodoTelescope <CR>", { desc = "Find Comments" }),
+			keywords = {
+				FIX = {
+					icon = " ", -- icon used for the sign, and in search results
+					color = "error", -- can be a hex color, or a named color (see below)
+					alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+				},
+				TODO = { icon = " ", color = "info" },
+				HACK = { icon = " ", color = "warning" },
+				WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+				PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+				NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+				TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+				REFS = { icon = " ", color = "info", alt = { "BIBS" } },
+			},
 		},
 	},
 
