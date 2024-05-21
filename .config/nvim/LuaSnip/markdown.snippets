@@ -1,0 +1,119 @@
+#
+# ░█▄█░█▀█░█▀▄░█░█░█▀▄░█▀█░█░█░█▀█
+# ░█░█░█▀█░█▀▄░█▀▄░█░█░█░█░█▄█░█░█
+# ░▀░▀░▀░▀░▀░▀░▀░▀░▀▀░░▀▀▀░▀░▀░▀░▀
+#
+snippet start "Yami header" b
+---
+lang: pt-BR
+---
+$0
+endsnippet
+
+snippet title "Title page" b
+<h1 align="center">
+${1:[tab]:title}
+</h1>
+$0
+endsnippet
+
+snippet code "Code block" b
+~~~${1:[tab]:type}
+$0
+~~~
+endsnippet
+
+snippet link "Link" b
+<${1:[tab]:link}>
+endsnippet
+
+snippet linklabel "Link and label" b
+[${1:[tab]:label}](${2:[tab]:link}) $0
+endsnippet
+
+snippet img "Image" b
+![${1:[tab]:label}](${2:[tab]:path-img}) $0
+endsnippet
+
+snippet tab "Table 2x2" b
+| ${1:[tab]:title1} | ${2:[tab]:title2} |
+| ---- | ---- |
+| ${3:[tab]:text} | ${4:[tab]:text} |
+$0
+endsnippet
+
+snippet man "Manual Page" b
+% $1(1)
+% @compiledge
+% May 2023
+
+# NAME
+
+Name of the command.
+
+# SYNOPSIS
+
+**$1** [**-h**] [**--configfile** *CONFIGFILE*] [**--sort**] [**--vim**] *keyword* [*keyword ...*]
+
+# DESCRIPTION
+
+A textual description of the functioning of the command or function.
+
+# GENERAL OPTIONS
+
+**-h**, **-\-help**
+:   Display a friendly help message.
+
+# EXAMPLES
+
+Others...
+
+# SEE ALSO
+
+Others...
+
+# BUGS
+
+Others...
+
+# AUTHOR
+
+Others...
+
+# COPYRIGHT
+
+Others...
+
+# EXIT STATUS
+
+Others...
+
+# RETURN VALUE
+
+Others...
+
+# ENVIRONMENT
+
+Others...
+
+# BUGS
+
+Others...
+
+# FILES
+
+Others...
+
+# AUTHOR
+
+Others...
+
+# REPORTING BUGS
+
+Others...
+
+# HISTORY
+
+Others...
+$0
+endsnippet

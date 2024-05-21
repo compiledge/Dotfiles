@@ -1,0 +1,64 @@
+#
+# ░▀█▀░█▀▀░█░█
+# ░░█░░█▀▀░▄▀▄
+# ░░▀░░▀▀▀░▀░▀
+#
+#------------------------------------------------
+snippet art "Article example" b
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\author{${1:[tab]:author}}
+\title{${2:[tab]:title}}
+\begin{document}
+${3:[tab]:text}
+$0
+\end{document}
+endsnippet
+
+snippet box "Comment box" b
+% ----------------------------------------------
+% 					${1:[tab]:title}
+% ----------------------------------------------
+$0
+endsnippet
+
+snippet ul "Outline unordered list" b
+\begin{outline}
+	\1 ${1:[tab]:item}
+\end{outline}
+$0
+endsnippet
+
+snippet ol "Outline ordered list" b
+\begin{outline}[enumerate]
+	\1 ${1:[tab]:item}
+\end{outline}
+$0
+endsnippet
+
+snippet lst "Lstlisting block" b
+\begin{lstlisting}[language=${1:[tab]:language}, caption=${2:[tab]:caption}]
+${3:[tab]:code}
+\end{lstlisting}
+$0
+endsnippet
+
+snippet dslide "Double column slide" b
+\begin{frame}{${1:[tab]:title}}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=1.0\textwidth]{img/${2:[tab]:img1}}
+	\end{center}
+\end{column}
+\begin{column}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=1.0\textwidth]{img/${3:[tab]:img2}}
+	\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+$0
+endsnippet
+#------------------------------------------------

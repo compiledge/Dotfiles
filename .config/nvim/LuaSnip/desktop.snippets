@@ -1,0 +1,18 @@
+#
+# ░█▀▄░█▀▀░█▀▀░█░█░▀█▀░█▀█░█▀█
+# ░█░█░█▀▀░▀▀█░█▀▄░░█░░█░█░█▀▀
+# ░▀▀░░▀▀▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀░░
+#
+#------------------------------------------------
+snippet start "Desktop entry" b
+[Desktop Entry]
+Name=${1:[tab]:app-name}
+Exec=${2:[tab]:bin-path}
+Comment=${3:[tab]:comment}
+Terminal=${4:[tab]:true/false}
+Icon=${5:[tab]:icon}
+Type=Application $0
+endsnippet
+
+#------------------------------------------------
+

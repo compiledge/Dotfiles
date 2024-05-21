@@ -1,0 +1,31 @@
+#
+# ░█▀▀░▀█▀░▀█▀░█▀▀░█▀█░█▄█░█▄█░▀█▀░▀█▀
+# ░█░█░░█░░░█░░█░░░█░█░█░█░█░█░░█░░░█░
+# ░▀▀▀░▀▀▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀░▀░▀▀▀░░▀░
+#
+snippet example "Commit example" b
+commit format: "<type>: <subject>"
+
+subject:
+Subject line (try to keep under 50 characters)
+
+types:
+- feat: A new feature;
+- fix: A bug fix;
+- docs: Documentation only changes;
+- style: Changes that do not affect the meaning of the code;
+- refactor: A code change that neither fixes a bug nor add a feature;
+- test: Adding missing tests or correcting existing ones;
+- chore: Changes to the build process or auxiliary tools;
+- perf: A code change that improves performarce;
+- ci: Changes to your CI configuration (files or scripts);
+- build: Changes thata affecat the build system
+- temp: Temporary commit (won't be included in your CHANGELOG)
+
+body:
+Multi-line description of commit, feel free to be detailed.
+
+example:
+docs: update READEME do add developer tips
+$0
+endsnippet
